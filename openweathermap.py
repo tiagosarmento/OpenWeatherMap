@@ -28,8 +28,8 @@ class OneCallApi:
         self._timeThrs = timeThrs
         self._ocadata  = dict()
         self._dataTime = 0
-        self._url      = f("https://api.openweathermap.org/data/2.5/onecall?lat={self._lat}&lon={self._lon}"
-                           "&units=metric&appid={self._key}")
+        self._url      = (f"https://api.openweathermap.org/data/2.5/onecall?lat={self._lat}&lon={self._lon}"
+                          f"&units=metric&appid={self._key}")
 
     # Dump Base Class attributes, these are the base configuration to access Open Weather Map for One Call API.
     # It requires logging level INFO to be enabled.
