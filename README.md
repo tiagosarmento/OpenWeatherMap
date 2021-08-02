@@ -1,1 +1,2 @@
-![example workflow](https://github.com/tiagosarmento/OpenWeatherMap/blob/main/.github/workflows/codeql-analysis.yml/badge.svg)
+# Project Status
+![example workflow](https://github.com/tiagosarmento/OpenWeatherMap/actions/workflows/codeql-analysis.yml/badge.svg)
