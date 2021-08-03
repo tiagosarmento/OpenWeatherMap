@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+
+# Unit test / coverage reports
+.coverage
+.coverage.*
+coverage.xml
+.pytest_cache/
+htmlcov/
+junit/
+
