@@ -22,14 +22,16 @@ logger = logging.getLogger(__name__)
 # Base Class to handle One Call API from Open Weather Map
 class OneCallApi:
     def __init__(self, lat, lon, key, timeThrs=60):
-        self._lat      = lat
-        self._lon      = lon
-        self._key      = key
+        self._lat = lat
+        self._lon = lon
+        self._key = key
         self._timeThrs = timeThrs
-        self._ocadata  = dict()
+        self._ocadata = dict()
         self._dataTime = 0
-        self._url      = (f"https://api.openweathermap.org/data/2.5/onecall?lat={self._lat}&lon={self._lon}"
-                          f"&units=metric&appid={self._key}")
+        self._url = (
+            f"https://api.openweathermap.org/data/2.5/onecall?lat={self._lat}&lon={self._lon}"
+            f"&units=metric&appid={self._key}"
+        )
 
     # Dump Base Class attributes, these are the base configuration to access Open Weather Map for One Call API.
     # It requires logging level INFO to be enabled.
@@ -75,7 +77,7 @@ class OneCallApi:
             logger.exception("Requests Error: %s", err)
             sys.exit(1)
         else:
-            self._ocadata  = req.json()
+            self._ocadata = req.json()
             self._dataTime = time.time()
 
     # Make an update of Open Weather Map data
@@ -116,27 +118,31 @@ class OneCallApi:
 # Derived Class to handle Current weather data API response
 class OneCallApiCurrent(OneCallApi):
     def __init__(self, lat, lon, key, timeThrs=60):
-        super().__init__(lat, lon, key, timeThrs) # Init parent attributes
-        self.__dt                  = "N/A" # Current time, Unix, UTC
-        self.__sunrise             = "N/A" # Sunrise time, Unix, UTC
-        self.__sunset              = "N/A" # Sunset time, Unix, UTC
-        self.__temp                = "N/A" # Temperature
-        self.__tempfeel            = "N/A" # Temperature feel
-        self.__pressure            = "N/A" # Atmospheric pressure on the sea level, hPa
-        self.__humidity            = "N/A" # Humidity, %
-        self.__dewpoint            = "N/A" # Atmospheric temperature
-        self.__clouds              = "N/A" # Cloudiness, %
-        self.__uvi                 = "N/A" # UV index
-        self.__visibility          = "N/A" # Average visibility, metres
-        self.__windspeed           = "N/A" # Wind speed (m/s)
-        self.__windgust            = "N/A" # Wind gust (where available)
-        self.__winddeg             = "N/A" # Wind direction, degrees (meteorological)
-        self.__rain1h              = "N/A" # Rain volume for last hour, mm (where available)
-        self.__snow1h              = "N/A" # Snow volume for last hour, mm (where available)
-        self.__weatherid           = "N/A" # Weather condition id
-        self.__weathermain         = "N/A" # Group of weather parameters (Rain, Snow, Extreme etc.)
-        self.__weatherdescription  = "N/A" # Weather condition within the group (full list of weather conditions).
-        self.__weathericon         = "N/A" # Weather icon id. How to get icons
+        super().__init__(lat, lon, key, timeThrs)  # Init parent attributes
+        self.__dt = "N/A"  # Current time, Unix, UTC
+        self.__sunrise = "N/A"  # Sunrise time, Unix, UTC
+        self.__sunset = "N/A"  # Sunset time, Unix, UTC
+        self.__temp = "N/A"  # Temperature
+        self.__tempfeel = "N/A"  # Temperature feel
+        self.__pressure = "N/A"  # Atmospheric pressure on the sea level, hPa
+        self.__humidity = "N/A"  # Humidity, %
+        self.__dewpoint = "N/A"  # Atmospheric temperature
+        self.__clouds = "N/A"  # Cloudiness, %
+        self.__uvi = "N/A"  # UV index
+        self.__visibility = "N/A"  # Average visibility, metres
+        self.__windspeed = "N/A"  # Wind speed (m/s)
+        self.__windgust = "N/A"  # Wind gust (where available)
+        self.__winddeg = "N/A"  # Wind direction, degrees (meteorological)
+        self.__rain1h = "N/A"  # Rain volume for last hour, mm (where available)
+        self.__snow1h = "N/A"  # Snow volume for last hour, mm (where available)
+        self.__weatherid = "N/A"  # Weather condition id
+        self.__weathermain = (
+            "N/A"
+        )  # Group of weather parameters (Rain, Snow, Extreme etc.)
+        self.__weatherdescription = (
+            "N/A"
+        )  # Weather condition within the group (full list of weather conditions).
+        self.__weathericon = "N/A"  # Weather icon id. How to get icons
 
     # Dump Open Weather Map, Current Weather attributes.
     # It requires logging level INFO to be enabled.
@@ -307,7 +313,7 @@ class OneCallApiCurrent(OneCallApi):
 # Minutely holds the precipitation forecast for the next hour in a minutely basis
 class OneCallApiMinutely(OneCallApi):
     def __init__(self, lat, lon, key, timeThrs=60):
-        super().__init__(lat, lon, key, timeThrs) # Init parent attributes
+        super().__init__(lat, lon, key, timeThrs)  # Init parent attributes
         self.__minutPrecDict = dict()
 
     # Gets 61 values: current + next 60 minutes
@@ -326,7 +332,7 @@ class OneCallApiMinutely(OneCallApi):
 # Hourly holds the weather forecast for the next 48 hours in a hourly basis
 class OneCallApiHourly(OneCallApi):
     def __init__(self, lat, lon, key, timeThrs=60):
-        super().__init__(lat, lon, key, timeThrs) # Init parent attributes
+        super().__init__(lat, lon, key, timeThrs)  # Init parent attributes
         self.__hourlyDict = dict()
 
     # Gets 48 values: weather for next 48 hours
@@ -340,7 +346,7 @@ class OneCallApiHourly(OneCallApi):
 # Daily holds the weather forecast for the next 7 days in a daily basis
 class OneCallApiDaily(OneCallApi):
     def __init__(self, lat, lon, key, timeThrs=60):
-        super().__init__(lat, lon, key, timeThrs) # Init parent attributes
+        super().__init__(lat, lon, key, timeThrs)  # Init parent attributes
         self.__dailyDict = dict()
 
     # Gets 7 values: weather today + for next 7 days
@@ -348,5 +354,6 @@ class OneCallApiDaily(OneCallApi):
         self.refreshData()
         self.__dailyDict = self._ocadata["daily"][day]
         return self.__dailyDict
+
 
 # End of module Open Weather Map for One Call API
