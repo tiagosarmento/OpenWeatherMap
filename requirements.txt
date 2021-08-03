@@ -1,0 +1,5 @@
+#
+# This file holds the required dependencies
+#
+DateTime
+requests
