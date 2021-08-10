@@ -140,7 +140,7 @@ class OneCallApi:
         logger.debug("   API url        : %s", self.__url)
         return conf_dict
 
-    # Get OpenWeatherMap raw data from OneCallApi response.
+    # Get OpenWeatherMap raw data from OneCallApi response. (full response)
     def raw_data(self):
         return self._rawdata
 
@@ -203,195 +203,137 @@ class OneCallApi:
 # Derived Class to handle Current weather data API response
 class OneCallApiCurrent(OneCallApi):
     def __init__(self, lat, lon, key):
-        super().__init__(lat, lon, key)  # Init parent attributes
-        self.__dt = "N/A"  # Current time, Unix, UTC
-        self.__sunrise = "N/A"  # Sunrise time, Unix, UTC
-        self.__sunset = "N/A"  # Sunset time, Unix, UTC
-        self.__temp = "N/A"  # Temperature
-        self.__tempfeel = "N/A"  # Temperature feel
-        self.__pressure = "N/A"  # Atmospheric pressure on the sea level, hPa
-        self.__humidity = "N/A"  # Humidity, %
-        self.__dewpoint = "N/A"  # Atmospheric temperature
-        self.__clouds = "N/A"  # Cloudiness, %
-        self.__uvi = "N/A"  # UV index
-        self.__visibility = "N/A"  # Average visibility, metres
-        self.__windspeed = "N/A"  # Wind speed (m/s)
-        self.__windgust = "N/A"  # Wind gust (where available)
-        self.__winddeg = "N/A"  # Wind direction, degrees (meteorological)
-        self.__rain1h = "N/A"  # Rain volume for last hour, mm (where available)
-        self.__snow1h = "N/A"  # Snow volume for last hour, mm (where available)
-        self.__weatherid = "N/A"  # Weather condition id
-        self.__weathermain = (
-            "N/A"
-        )  # Group of weather parameters (Rain, Snow, Extreme etc.)
-        self.__weatherdescription = (
-            "N/A"
-        )  # Weather condition within the group (full list of weather conditions).
-        self.__weathericon = "N/A"  # Weather icon id. How to get icons
+        super().__init__(
+            lat, lon, key, "minutely,daily,hourly,alerts"
+        )  # Init parent attributes
 
-    # Dump OpenWeatherMap, Current Weather attributes.
-    # It requires logging level INFO to be enabled.
-    def dumpCurrentWeatherData(self):
-        logger.info("Current date                : %s", self.__dt)
-        logger.info("Current sunrise             : %s", self.__sunrise)
-        logger.info("Current sunset              : %s", self.__sunset)
-        logger.info("Current temperature         : %s", self.__temp)
-        logger.info("Current temperature feel    : %s", self.__tempfeel)
-        logger.info("Current pressure            : %s", self.__pressure)
-        logger.info("Current humidity            : %s", self.__humidity)
-        logger.info("Current dew point           : %s", self.__dewpoint)
-        logger.info("Current clouds              : %s", self.__clouds)
-        logger.info("Current uvi                 : %s", self.__uvi)
-        logger.info("Current visibility          : %s", self.__visibility)
-        logger.info("Current wind speed          : %s", self.__windspeed)
-        logger.info("Current wind gust           : %s", self.__windgust)
-        logger.info("Current wind deg            : %s", self.__winddeg)
-        logger.info("Current rain 1h             : %s", self.__rain1h)
-        logger.info("Current snow 1h             : %s", self.__snow1h)
-        logger.info("Current weather id          : %s", self.__weatherid)
-        logger.info("Current weather main        : %s", self.__weathermain)
-        logger.info("Current weather description : %s", self.__weatherdescription)
-        logger.info("Current weather icon        : %s", self.__weathericon)
+    def __is_data_available(self, field):
+        value = False
+        if ("current" in self._rawdata) and (field in self._rawdata["current"]):
+            value = True
+        return value
+
+    def __extract_date_field(self, field, metrics=0):
+        value = "N/A"
+        if self.__is_data_available(field) is True:
+            if metrics == 0:
+                value = datetime.fromtimestamp(self._rawdata["current"][field])
+            else:
+                value = self._rawdata["current"][field]
+        logger.debug("Value for %s is: %s", field, value)
+        return value
+
+    def __extract_value_field(self, field):
+        value = "N/A"
+        if self.__is_data_available(field) is True:
+            value = self._rawdata["current"][field]
+        logger.debug("Value for %s is: %s", field, value)
+        return value
+
+    def __extract_weather_field(self, field):
+        value = "N/A"
+        if self.__is_data_available("weather") is True:
+            if field in self._rawdata["current"]["weather"][0]:
+                value = self._rawdata["current"]["weather"][0][field]
+        logger.debug("Value for %s is: %s", field, value)
+        return value
+
+    def raw_data_current(self):
+        value = dict()
+        if "current" in self._rawdata:
+            value = self._rawdata["current"]
+        return value
 
     # Get Current time, Unix, UTC
     # metrics defaults to 0: date in human readable format
     # any other value, date is represented as UNIX seconds
-    def getCurrentTime(self, metrics=0):
-        self.refreshData()
-        self.__dt = self._rawdata["current"]["dt"]
-        if metrics == 0:
-            retTime = datetime.fromtimestamp(self.__dt)
-            logger.info("RET TIME: %s", retTime)
-        else:
-            retTime = self.__dt
-        return retTime
+    def data_time(self, metrics=0):
+        return self.__extract_date_field("dt", metrics)
 
     # Get Sunrise time, Unix, UTC
-    def getCurrentSunrise(self):
-        self.refreshData()
-        self.__sunrise = self._rawdata["current"]["sunrise"]
-        return self.__sunrise
+    def sunrise(self, metrics=0):
+        return self.__extract_date_field("sunrise", metrics)
 
     # Get Sunset time, Unix, UTC
-    def getCurrentSunset(self):
-        self.refreshData()
-        self.__sunset = self._rawdata["current"]["sunset"]
-        return self.__sunset
+    def sunset(self, metrics=0):
+        return self.__extract_date_field("sunset", metrics)
 
     # Get Current Temperature
-    def getCurrentTemperature(self):
-        self.refreshData()
-        self.__temp = self._rawdata["current"]["temp"]
-        return self.__temp
+    def temperature(self):
+        return self.__extract_value_field("temp")
 
     # Get Current Temperature feel
-    def getCurrentTemperatureFeel(self):
-        self.refreshData()
-        self.__tempfeel = self._rawdata["current"]["feels_like"]
-        return self.__tempfeel
+    def temperature_feels_like(self):
+        return self.__extract_value_field("feels_like")
 
     # Get Current Atmospheric pressure on the sea level, hPa
-    def getCurrentPressure(self):
-        self.refreshData()
-        self.__pressure = self._rawdata["current"]["pressure"]
-        return self.__pressure
+    def pressure(self):
+        return self.__extract_value_field("pressure")
 
     # Get Current Humidity, %
-    def getCurrentHumidity(self):
-        self.refreshData()
-        self.__humidity = self._rawdata["current"]["humidity"]
-        return self.__humidity
+    def humidity(self):
+        return self.__extract_value_field("humidity")
 
     # Get Current Atmospheric temperature
-    def getCurrentDewPoint(self):
-        self.refreshData()
-        self.__dewpoint = self._rawdata["current"]["dew_point"]
-        return self.__dewpoint
+    def dew_point(self):
+        return self.__extract_value_field("dew_point")
 
     # Get Current Cloudiness, %
-    def getCurrentClouds(self):
-        self.refreshData()
-        self.__clouds = self._rawdata["current"]["clouds"]
-        return self.__clouds
+    def clouds(self):
+        return self.__extract_value_field("clouds")
 
     # Get Current UV index
-    def getCurrentUvi(self):
-        self.refreshData()
-        self.__uvi = self._rawdata["current"]["uvi"]
-        return self.__uvi
+    def uvi(self):
+        return self.__extract_value_field("uvi")
 
     # Get Current Average visibility, metres
-    def getCurrentVisibility(self):
-        self.refreshData()
-        self.__visibility = self._rawdata["current"]["visibility"]
-        return self.__visibility
+    def visibility(self):
+        return self.__extract_value_field("visibility")
 
     # Get Current Wind speed (m/s)
-    def getCurrentWindSpeed(self):
-        self.refreshData()
-        self.__windspeed = self._rawdata["current"]["wind_speed"]
-        return self.__windspeed
+    def wind_speed(self):
+        return self.__extract_value_field("wind_speed")
 
     # Get Current Wind gust (where available)
-    def getCurrentWindGust(self):
-        self.refreshData()
-        if "wind_gust" in self._rawdata["current"]:
-            self.__windgust = self._rawdata["current"]["wind_gust"]
-        else:
-            self.__windgust = "N/A"
-        return self.__windgust
+    def wind_gust(self):
+        return self.__extract_value_field("wind_gust")
 
     # Get Current Wind direction, degrees (meteorological)
-    def getCurrentWindDirection(self):
-        self.refreshData()
-        self.__winddeg = self._rawdata["current"]["wind_deg"]
-        return self.__winddeg
+    def wind_deg(self):
+        return self.__extract_value_field("wind_deg")
 
     # Get Current Rain volume for last hour, mm (where available)
-    def getCurrentRainVolume(self):
-        self.refreshData()
-        if "rain" in self._rawdata["current"]:
-            self.__rain1h = self._rawdata["current"]["rain"]["1h"]
-        else:
-            self.__rain1h = "N/A"
-        return self.__rain1h
+    def rain_volume(self):
+        value = "N/A"
+        if self.__is_data_available("rain") is True:
+            if "1h" in self._rawdata["current"]["rain"]:
+                value = self._rawdata["current"]["rain"]["1h"]
+        return value
 
     # Get Current Snow volume for last hour, mm (where available)
-    def getCurrentSnowVolume(self):
-        self.refreshData()
-        if "snow" in self._rawdata["current"]:
-            self.__snow1h = self._rawdata["current"]["snow"]["1h"]
-        else:
-            self.__snow1h = "N/A"
-        return self.__snow1h
+    def snow_volume(self):
+        value = "N/A"
+        if self.__is_data_available("snow") is True:
+            if "1h" in self._rawdata["current"]["snow"]:
+                value = self._rawdata["current"]["snow"]["1h"]
+        return value
 
     # Get Current Weather condition id
-    def getCurrentWeatherConditionId(self):
-        self.refreshData()
-        weatherDict = self._rawdata["current"]["weather"][0]
-        self.__weatherid = weatherDict["id"]
-        return self.__weatherid
+    def weather_condition_id(self):
+        return self.__extract_weather_field("id")
 
     # Get Group of weather parameters (Rain, Snow, Extreme etc.)
-    def getCurrentWeatherConditionMain(self):
-        self.refreshData()
-        weatherDict = self._rawdata["current"]["weather"][0]
-        self.__weathermain = weatherDict["main"]
-        return self.__weathermain
+    def weather_condition_main(self):
+        return self.__extract_weather_field("main")
 
     # Get Weather condition within the group (full list of weather conditions)
-    def getCurrentWeatherConditionDescription(self):
-        self.refreshData()
-        weatherDict = self._rawdata["current"]["weather"][0]
-        self.__weatherdescription = weatherDict["description"]
-        return self.__weatherdescription
+    def weather_condition_description(self):
+        return self.__extract_weather_field("description")
 
     # Get Weather icon id. How to get icons
-    def getCurrentWeatherConditionIconId(self):
-        self.refreshData()
-        weatherDict = self._rawdata["current"]["weather"][0]
-        self.__weathericon = weatherDict["icon"]
-        return self.__weathericon
+    #  http://openweathermap.org/img/wn/<icon_id>@2x.png
+    def weather_condition_icon(self):
+        return self.__extract_weather_field("icon")
 
 
 # Derived Class to handle Minutely weather data API response
@@ -403,7 +345,7 @@ class OneCallApiMinutely(OneCallApi):
 
     # Gets 61 values: current + next 60 minutes
     def getMinutelyData(self, minute=0):
-        self.refreshData()
+        self.updateData()
         if minute == 0:
             # gets the full dictionary data
             self.__minutPrecDict = self._rawdata["minutely"]
@@ -422,7 +364,7 @@ class OneCallApiHourly(OneCallApi):
 
     # Gets 48 values: weather for next 48 hours
     def getHourlyData(self, hour=0):
-        self.refreshData()
+        self.updateData()
         self.__hourlyDict = self._rawdata["hourly"][hour]
         return self.__hourlyDict
 
@@ -436,7 +378,7 @@ class OneCallApiDaily(OneCallApi):
 
     # Gets 7 values: weather today + for next 7 days
     def getDailyData(self, day=0):
-        self.refreshData()
+        self.updateData()
         self.__dailyDict = self._rawdata["daily"][day]
         return self.__dailyDict
 
