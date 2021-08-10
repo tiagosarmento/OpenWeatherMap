@@ -2,14 +2,21 @@ import openweathermap
 import pytest
 
 # CONSTANT DATA
-LAT = 43.58
-LON = 7.19
+LAT = 45.1234
+LON = 1.2345
 KEY = "abcdef1234567890abcdef1234567890"
 EXC = "current,daily,hourly,alerts"
 URL = (
     f"https://api.openweathermap.org/data/2.5/onecall?lat={LAT}&lon={LON}"
     f"&exclude={EXC}&units=metric&appid={KEY}"
 )
+
+RAW_DATA = {
+    "lat": 45.1234,
+    "lon": 1.2345,
+    "timezone": "Europe/Paris",
+    "timezone_offset": 7200,
+}
 
 
 # Test: validate constructor nominal case
@@ -66,8 +73,13 @@ def test_0004():
 # Test: validate method raw_data
 def test_0005():
     oca = openweathermap.OneCallApi(LAT, LON, KEY, EXC)
+    oca._rawdata = RAW_DATA
     data_dict = oca.raw_data()
     assert type(data_dict) is dict
+    assert data_dict["lat"] == 45.1234
+    assert data_dict["lon"] == 1.2345
+    assert data_dict["timezone"] == "Europe/Paris"
+    assert data_dict["timezone_offset"] == 7200
 
 
 # Test: validate method updateData
@@ -80,16 +92,20 @@ def test_0006():
 # Test: validate method timezone
 def test_0007():
     oca = openweathermap.OneCallApi(LAT, LON, KEY, EXC)
-    assert oca.timezone() == ""
+    oca._rawdata = RAW_DATA
+    assert oca.timezone() == RAW_DATA["timezone"]
 
 
 # Test: validate method timezone_offset
 def test_0008():
     oca = openweathermap.OneCallApi(LAT, LON, KEY, EXC)
-    assert oca.timezone_offset() == ""
+    oca._rawdata = RAW_DATA
+    assert oca.timezone_offset() == RAW_DATA["timezone_offset"]
 
 
 # Test: validate method timestamp
 def test_0009():
+    value = 12345
     oca = openweathermap.OneCallApi(LAT, LON, KEY, EXC)
-    assert oca.timestamp() == 0
+    oca._timestamp = value
+    assert oca.timestamp() == value
