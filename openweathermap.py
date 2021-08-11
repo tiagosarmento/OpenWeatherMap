@@ -203,9 +203,7 @@ class OneCallApi:
 # Derived Class to handle Current weather data API response
 class OneCallApiCurrent(OneCallApi):
     def __init__(self, lat, lon, key):
-        super().__init__(
-            lat, lon, key, "minutely,daily,hourly,alerts"
-        )  # Init parent attributes
+        super().__init__(lat, lon, key, "minutely,daily,hourly,alerts")
 
     def __is_data_available(self, field):
         value = False
@@ -217,7 +215,8 @@ class OneCallApiCurrent(OneCallApi):
         value = "N/A"
         if self.__is_data_available(field) is True:
             if metrics == 0:
-                value = datetime.fromtimestamp(self._rawdata["current"][field])
+                dt = datetime.fromtimestamp(self._rawdata["current"][field])
+                value = f"{dt:%Y-%m-%d %H:%M:%S}"
             else:
                 value = self._rawdata["current"][field]
         logger.debug("Value for %s is: %s", field, value)
@@ -338,21 +337,65 @@ class OneCallApiCurrent(OneCallApi):
 
 # Derived Class to handle Minutely weather data API response
 # Minutely holds the precipitation forecast for the next hour in a minutely basis
+# Gets 61 values: current + next 60 minutes
 class OneCallApiMinutely(OneCallApi):
     def __init__(self, lat, lon, key):
-        super().__init__(lat, lon, key)  # Init parent attributes
-        self.__minutPrecDict = dict()
+        super().__init__(lat, lon, key, "current,daily,hourly,alerts")
 
-    # Gets 61 values: current + next 60 minutes
-    def getMinutelyData(self, minute=0):
-        self.updateData()
-        if minute == 0:
-            # gets the full dictionary data
-            self.__minutPrecDict = self._rawdata["minutely"]
+    def __is_data_available(self, minute, field):
+        value = False
+        if ("minutely" in self._rawdata) and (
+            field in self._rawdata["minutely"][minute]
+        ):
+            value = True
+        return value
+
+    def __extract_date_field(self, minute, field, metrics=0):
+        value = "N/A"
+        if self.__is_data_available(minute, field) is True:
+            if metrics == 0:
+                dt = datetime.fromtimestamp(self._rawdata["minutely"][minute][field])
+                value = f"{dt:%Y-%m-%d %H:%M:%S}"
+            else:
+                value = self._rawdata["minutely"][minute][field]
+        logger.debug("Value for %s is: %s", field, value)
+        return value
+
+    def __extract_value_field(self, minute, field):
+        value = "N/A"
+        if self.__is_data_available(minute, field) is True:
+            value = self._rawdata["minutely"][minute][field]
+        logger.debug("Value for %s is: %s", field, value)
+        return value
+
+    def raw_data_minutely(self):
+        value = dict()
+        if "minutely" in self._rawdata:
+            value = self._rawdata["minutely"]
+        return value
+
+    def precipitation(self, minute=0):
+        if minute < 0 or minute > 60:
+            raise ValueError("The 'minute' argument must be within range [0, 60]")
+        elif minute == 0:
+            value = [0] * 61  # Initialize the 61 precipitation values
+            for idx in range(61):
+                value[idx] = self.__extract_value_field(idx, "precipitation")
+                print("val is ", value[idx])
         else:
-            # gets current time + minute precipitation forecast
-            self.__minutPrecDict = self._rawdata["minutely"][minute]["precipitation"]
-        return self.__minutPrecDict
+            value = self.__extract_value_field(minute, "precipitation")
+        return value
+
+    def data_time(self, minute=0, metrics=0):
+        if minute < 0 or minute > 60:
+            raise ValueError("The 'minute' argument must be within range [0, 60]")
+        elif minute == 0:
+            value = [0] * 61  # Initialize the 61 data time values
+            for idx in range(61):
+                value[idx] = self.__extract_date_field(idx, "dt", metrics)
+        else:
+            value = self.__extract_date_field(minute, "dt", metrics)
+        return value
 
 
 # Derived Class to handle Hourly weather data API response
