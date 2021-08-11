@@ -5,7 +5,7 @@ import pytest
 LAT = 45.1234
 LON = 1.2345
 KEY = "abcdef1234567890abcdef1234567890"
-EXC = "current,daily,hourly,alerts"
+EXC = "current,minutely,daily,hourly,alerts"
 URL = (
     f"https://api.openweathermap.org/data/2.5/onecall?lat={LAT}&lon={LON}"
     f"&exclude={EXC}&units=metric&appid={KEY}"
@@ -26,6 +26,7 @@ def test_0000():
     assert oca.lat == LAT
     assert oca.lon == LON
     assert oca.key == KEY
+    assert oca.exc == EXC
 
 
 # Test: validate constructor for latitude
