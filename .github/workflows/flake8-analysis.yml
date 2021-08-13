@@ -38,4 +38,4 @@ jobs:
           # Ignore:
           #   E221: multiple spaces before operator
           #   E261: at least two spaces before inline comment
-          flake8 . --count --ignore=E221,E261 --max-complexity=10 --max-line-length=127 --statistics
+          flake8 . --count --ignore=W503,W504 --max-complexity=10 --max-line-length=127 --statistics

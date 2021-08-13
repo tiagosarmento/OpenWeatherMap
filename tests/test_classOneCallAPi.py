@@ -6,10 +6,7 @@ LAT = 45.1234
 LON = 1.2345
 KEY = "abcdef1234567890abcdef1234567890"
 EXC = "current,minutely,daily,hourly,alerts"
-URL = (
-    f"https://api.openweathermap.org/data/2.5/onecall?lat={LAT}&lon={LON}"
-    f"&exclude={EXC}&units=metric&appid={KEY}"
-)
+URL = f"https://api.openweathermap.org/data/2.5/onecall?lat={LAT}&lon={LON}" f"&exclude={EXC}&units=metric&appid={KEY}"
 
 RAW_DATA = {
     "lat": 45.1234,
@@ -59,8 +56,22 @@ def test_0003():
         openweathermap.OneCallApi(LAT, LON, "abcdef1234567890abcdef", EXC)
 
 
-# Test: validate method config
+# Test: validate constructor for exc
 def test_0004():
+    # case empty excluded string
+    oca = openweathermap.OneCallApi(LAT, LON, KEY, "")
+    assert oca.exc == ""
+    # case invalid characters
+    with pytest.raises(ValueError):
+        for char in '@^! #%$&)(+*-="':
+            openweathermap.OneCallApi(LAT, LON, KEY, char)
+    # case invalid word
+    with pytest.raises(ValueError):
+        openweathermap.OneCallApi(LAT, LON, KEY, "toto,tata")
+
+
+# Test: validate method config
+def test_0005():
     oca = openweathermap.OneCallApi(LAT, LON, KEY, EXC)
     conf_dict = oca.config()
     assert type(conf_dict) is dict
@@ -72,7 +83,7 @@ def test_0004():
 
 
 # Test: validate method raw_data
-def test_0005():
+def test_0006():
     oca = openweathermap.OneCallApi(LAT, LON, KEY, EXC)
     oca._rawdata = RAW_DATA
     data_dict = oca.raw_data()
@@ -85,27 +96,27 @@ def test_0005():
 
 # Test: validate method updateData
 @pytest.mark.filterwarnings("ignore:Unverified HTTPS request is being made.*")
-def test_0006():
+def test_0007():
     oca = openweathermap.OneCallApi(LAT, LON, KEY, EXC)
     assert oca.updateData() is False
 
 
 # Test: validate method timezone
-def test_0007():
+def test_0008():
     oca = openweathermap.OneCallApi(LAT, LON, KEY, EXC)
     oca._rawdata = RAW_DATA
     assert oca.timezone() == RAW_DATA["timezone"]
 
 
 # Test: validate method timezone_offset
-def test_0008():
+def test_0009():
     oca = openweathermap.OneCallApi(LAT, LON, KEY, EXC)
     oca._rawdata = RAW_DATA
     assert oca.timezone_offset() == RAW_DATA["timezone_offset"]
 
 
 # Test: validate method timestamp
-def test_0009():
+def test_0010():
     value = 12345
     oca = openweathermap.OneCallApi(LAT, LON, KEY, EXC)
     oca._timestamp = value

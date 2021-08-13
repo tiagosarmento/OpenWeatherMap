@@ -75,9 +75,7 @@ class OneCallApi:
         try:
             int(key, 16)
         except ValueError:
-            logger.error(
-                "The 'key' argument must be an hash value of 32 hexadecimal digits"
-            )
+            logger.error("The 'key' argument must be an hash value of 32 hexadecimal digits")
             raise  # raise error for traceback access
 
         if len(key) != 32:
@@ -101,9 +99,7 @@ class OneCallApi:
         elif any(True for char in exc if char in '@^! #%$&)(+*-="'):
             # the exclusion shall be a comma-delimited string (without spaces).
             # Allowed values are: current, minutely, hourly, daily and alerts
-            raise ValueError(
-                "The 'exc' argument must be a comma-delimited string (without spaces)"
-            )
+            raise ValueError("The 'exc' argument must be a comma-delimited string (without spaces)")
         else:
             # the exclusion shall contain specific words
             specWordList = ["current", "minutely", "hourly", "daily", "alerts"]
@@ -112,12 +108,8 @@ class OneCallApi:
                 if excWord in specWordList:
                     logger.debug("The 'exc' argument contains word: %s", excWord)
                 else:
-                    logger.error(
-                        "The 'exc' argument contains an invalid word: %s", excWord
-                    )
-                    raise ValueError(
-                        "The 'exc' argument must specific words: (current, minutely, hourly, daily, alerts)"
-                    )
+                    logger.error("The 'exc' argument contains an invalid word: %s", excWord)
+                    raise ValueError("The 'exc' argument must specific words: (current, minutely, hourly, daily, alerts)")
             self._exc = exc
         logger.debug("Set 'exc' value to: %s", self._exc)
 
@@ -344,9 +336,7 @@ class OneCallApiMinutely(OneCallApi):
 
     def __is_data_available(self, minute, field):
         value = False
-        if ("minutely" in self._rawdata) and (
-            field in self._rawdata["minutely"][minute]
-        ):
+        if ("minutely" in self._rawdata) and (field in self._rawdata["minutely"][minute]):
             value = True
         return value
 
@@ -374,22 +364,21 @@ class OneCallApiMinutely(OneCallApi):
             value = self._rawdata["minutely"]
         return value
 
-    def precipitation(self, minute=0):
+    def precipitation(self, minute=0, all_values=False):
         if minute < 0 or minute > 60:
             raise ValueError("The 'minute' argument must be within range [0, 60]")
-        elif minute == 0:
+        elif all_values is True:
             value = [0] * 61  # Initialize the 61 precipitation values
             for idx in range(61):
                 value[idx] = self.__extract_value_field(idx, "precipitation")
-                print("val is ", value[idx])
         else:
             value = self.__extract_value_field(minute, "precipitation")
         return value
 
-    def data_time(self, minute=0, metrics=0):
+    def data_time(self, minute=0, metrics=0, all_values=False):
         if minute < 0 or minute > 60:
             raise ValueError("The 'minute' argument must be within range [0, 60]")
-        elif minute == 0:
+        elif all_values is True:
             value = [0] * 61  # Initialize the 61 data time values
             for idx in range(61):
                 value[idx] = self.__extract_date_field(idx, "dt", metrics)
@@ -400,30 +389,365 @@ class OneCallApiMinutely(OneCallApi):
 
 # Derived Class to handle Hourly weather data API response
 # Hourly holds the weather forecast for the next 48 hours in a hourly basis
+# Values are for current hour + 47
 class OneCallApiHourly(OneCallApi):
     def __init__(self, lat, lon, key):
-        super().__init__(lat, lon, key)  # Init parent attributes
-        self.__hourlyDict = dict()
+        super().__init__(lat, lon, key, "current,daily,minutely,alerts")
 
-    # Gets 48 values: weather for next 48 hours
-    def getHourlyData(self, hour=0):
-        self.updateData()
-        self.__hourlyDict = self._rawdata["hourly"][hour]
-        return self.__hourlyDict
+    def __is_data_available(self, hour, field):
+        value = False
+        if ("hourly" in self._rawdata) and (field in self._rawdata["hourly"][hour]):
+            value = True
+        return value
+
+    def __extract_date_field(self, hour, field, metrics=0):
+        value = "N/A"
+        if self.__is_data_available(hour, field) is True:
+            if metrics == 0:
+                dt = datetime.fromtimestamp(self._rawdata["hourly"][hour][field])
+                value = f"{dt:%Y-%m-%d %H:%M:%S}"
+            else:
+                value = self._rawdata["hourly"][hour][field]
+        logger.debug("Value for %s is: %s", field, value)
+        return value
+
+    def __extract_value_field(self, hour, field):
+        value = "N/A"
+        if self.__is_data_available(hour, field) is True:
+            value = self._rawdata["hourly"][hour][field]
+        logger.debug("Value for %s is: %s", field, value)
+        return value
+
+    def __extract_value_set(self, hour, field, all_values):
+        if hour < 0 or hour > 48:
+            raise ValueError("The 'hour' argument must be within range [0, 48]")
+        elif all_values is True:
+            value = [0] * 48  # Initialize the 48 data time values
+            for idx in range(48):
+                value[idx] = self.__extract_value_field(idx, field)
+        else:
+            value = self.__extract_value_field(hour, field)
+        return value
+
+    def __extract_weather_field(self, hour, field):
+        value = "N/A"
+        if ("hourly" in self._rawdata) and ("weather" in self._rawdata["hourly"][hour]):
+            if field in self._rawdata["hourly"][hour]["weather"][0]:
+                value = self._rawdata["hourly"][hour]["weather"][0][field]
+        logger.debug("Value for %s is: %s", field, value)
+        return value
+
+    def __extract_weather_set(self, hour, field, all_values):
+        if hour < 0 or hour > 48:
+            raise ValueError("The 'hour' argument must be within range [0, 48]")
+        elif all_values is True:
+            value = [0] * 48  # Initialize the 48 data time values
+            for idx in range(48):
+                value[idx] = self.__extract_weather_field(idx, field)
+        else:
+            value = self.__extract_weather_field(hour, field)
+        return value
+
+    def raw_data_hourly(self):
+        value = dict()
+        if "hourly" in self._rawdata:
+            value = self._rawdata["hourly"]
+        return value
+
+    def data_time(self, hour=0, metrics=0, all_values=False):
+        if hour < 0 or hour > 48:
+            raise ValueError("The 'hour' argument must be within range [0, 48]")
+        elif all_values is True:
+            value = [0] * 48  # Initialize the 48 data time values
+            for idx in range(48):
+                value[idx] = self.__extract_date_field(idx, "dt", metrics)
+        else:
+            value = self.__extract_date_field(hour, "dt", metrics)
+        return value
+
+    def temp(self, hour=0, all_values=False):
+        return self.__extract_value_set(hour, "temp", all_values)
+
+    def feels_like(self, hour=0, all_values=False):
+        return self.__extract_value_set(hour, "feels_like", all_values)
+
+    def pressure(self, hour=0, all_values=False):
+        return self.__extract_value_set(hour, "pressure", all_values)
+
+    def humidity(self, hour=0, all_values=False):
+        return self.__extract_value_set(hour, "humidity", all_values)
+
+    def dew_point(self, hour=0, all_values=False):
+        return self.__extract_value_set(hour, "dew_point", all_values)
+
+    def uvi(self, hour=0, all_values=False):
+        return self.__extract_value_set(hour, "uvi", all_values)
+
+    def clouds(self, hour=0, all_values=False):
+        return self.__extract_value_set(hour, "clouds", all_values)
+
+    def visibility(self, hour=0, all_values=False):
+        return self.__extract_value_set(hour, "visibility", all_values)
+
+    def wind_speed(self, hour=0, all_values=False):
+        return self.__extract_value_set(hour, "wind_speed", all_values)
+
+    def wind_deg(self, hour=0, all_values=False):
+        return self.__extract_value_set(hour, "wind_deg", all_values)
+
+    def wind_gust(self, hour=0, all_values=False):
+        return self.__extract_value_set(hour, "wind_gust", all_values)
+
+    def weather_id(self, hour=0, all_values=False):
+        return self.__extract_weather_set(hour, "id", all_values)
+
+    def weather_main(self, hour=0, all_values=False):
+        return self.__extract_weather_set(hour, "main", all_values)
+
+    def weather_description(self, hour=0, all_values=False):
+        return self.__extract_weather_set(hour, "description", all_values)
+
+    def weather_icon(self, hour=0, all_values=False):
+        return self.__extract_weather_set(hour, "icon", all_values)
+
+    def pop(self, hour=0, all_values=False):
+        return self.__extract_value_set(hour, "pop", all_values)
 
 
 # Derived Class to handle Daily weather data API response
 # Daily holds the weather forecast for the next 7 days in a daily basis
+# Gets 7 values: weather today + for next 7 days
 class OneCallApiDaily(OneCallApi):
     def __init__(self, lat, lon, key):
-        super().__init__(lat, lon, key)  # Init parent attributes
-        self.__dailyDict = dict()
+        super().__init__(lat, lon, key, "current,hourly,minutely,alerts")
 
-    # Gets 7 values: weather today + for next 7 days
-    def getDailyData(self, day=0):
-        self.updateData()
-        self.__dailyDict = self._rawdata["daily"][day]
-        return self.__dailyDict
+    def __is_data_available(self, day, field):
+        value = False
+        if ("daily" in self._rawdata) and (field in self._rawdata["daily"][day]):
+            value = True
+        return value
+
+    def __extract_date_field(self, day, field, metrics=0):
+        value = "N/A"
+        if self.__is_data_available(day, field) is True:
+            if metrics == 0:
+                dt = datetime.fromtimestamp(self._rawdata["daily"][day][field])
+                value = f"{dt:%Y-%m-%d %H:%M:%S}"
+            else:
+                value = self._rawdata["daily"][day][field]
+        logger.debug("Value for %s is: %s", field, value)
+        return value
+
+    def __extract_date_set(self, day, field, metrics=0, all_values=False):
+        if day < 0 or day > 7:
+            raise ValueError("The 'day' argument must be within range [0, 7]")
+        elif all_values is True:
+            value = [0] * 7  # Initialize the 48 data time values
+            for idx in range(7):
+                value[idx] = self.__extract_date_field(idx, field, metrics)
+        else:
+            value = self.__extract_date_field(day, field, metrics)
+        return value
+
+    def __extract_temp_field(self, day, group, field):
+        value = "N/A"
+        if self.__is_data_available(day, group) is True:
+            if field in self._rawdata["daily"][day][group]:
+                value = self._rawdata["daily"][day][group][field]
+        logger.debug("Value for %s is: %s", field, value)
+        return value
+
+    def __extract_temp_set(self, day, group, field, all_values):
+        if day < 0 or day > 7:
+            raise ValueError("The 'day' argument must be within range [0, 7]")
+        elif all_values is True:
+            value = [0] * 7  # Initialize the 7 data time values
+            for idx in range(7):
+                value[idx] = self.__extract_temp_field(idx, group, field)
+        else:
+            value = self.__extract_temp_field(day, group, field)
+        return value
+
+    def __extract_value_field(self, day, field):
+        value = "N/A"
+        if self.__is_data_available(day, field) is True:
+            value = self._rawdata["daily"][day][field]
+        logger.debug("Value for %s is: %s", field, value)
+        return value
+
+    def __extract_value_set(self, day, field, all_values):
+        if day < 0 or day > 7:
+            raise ValueError("The 'day' argument must be within range [0, 7]")
+        elif all_values is True:
+            value = [0] * 7  # Initialize the 7 data time values
+            for idx in range(7):
+                value[idx] = self.__extract_value_field(idx, field)
+        else:
+            value = self.__extract_value_field(day, field)
+        return value
+
+    def __extract_weather_field(self, day, field):
+        value = "N/A"
+        if ("daily" in self._rawdata) and ("weather" in self._rawdata["daily"][day]):
+            if field in self._rawdata["daily"][day]["weather"][0]:
+                value = self._rawdata["daily"][day]["weather"][0][field]
+        logger.debug("Value for %s is: %s", field, value)
+        return value
+
+    def __extract_weather_set(self, day, field, all_values):
+        if day < 0 or day > 7:
+            raise ValueError("The 'hour' argument must be within range [0, 7]")
+        elif all_values is True:
+            value = [0] * 7  # Initialize the 7 data time values
+            for idx in range(7):
+                value[idx] = self.__extract_weather_field(idx, field)
+        else:
+            value = self.__extract_weather_field(day, field)
+        return value
+
+    def raw_data_daily(self):
+        value = dict()
+        if "daily" in self._rawdata:
+            value = self._rawdata["daily"]
+        return value
+
+    def data_time(self, day=0, metrics=0, all_values=False):
+        return self.__extract_date_set(day, "dt", metrics, all_values)
+
+    def sunrise(self, day=0, metrics=0, all_values=False):
+        return self.__extract_date_set(day, "sunrise", metrics, all_values)
+
+    def sunset(self, day=0, metrics=0, all_values=False):
+        return self.__extract_date_set(day, "sunset", metrics, all_values)
+
+    def moonrise(self, day=0, metrics=0, all_values=False):
+        return self.__extract_date_set(day, "moonrise", metrics, all_values)
+
+    def moonset(self, day=0, metrics=0, all_values=False):
+        return self.__extract_date_set(day, "moonset", metrics, all_values)
+
+    def temp_day(self, day=0, all_values=False):
+        return self.__extract_temp_set(day, "temp", "day", all_values)
+
+    def temp_min(self, day=0, all_values=False):
+        return self.__extract_temp_set(day, "temp", "min", all_values)
+
+    def temp_max(self, day=0, all_values=False):
+        return self.__extract_temp_set(day, "temp", "max", all_values)
+
+    def temp_night(self, day=0, all_values=False):
+        return self.__extract_temp_set(day, "temp", "night", all_values)
+
+    def temp_eve(self, day=0, all_values=False):
+        return self.__extract_temp_set(day, "temp", "eve", all_values)
+
+    def temp_morn(self, day=0, all_values=False):
+        return self.__extract_temp_set(day, "temp", "morn", all_values)
+
+    def feels_like_day(self, day=0, all_values=False):
+        return self.__extract_temp_set(day, "feels_like", "day", all_values)
+
+    def feels_like_night(self, day=0, all_values=False):
+        return self.__extract_temp_set(day, "feels_like", "night", all_values)
+
+    def feels_like_eve(self, day=0, all_values=False):
+        return self.__extract_temp_set(day, "feels_like", "eve", all_values)
+
+    def feels_like_morn(self, day=0, all_values=False):
+        return self.__extract_temp_set(day, "feels_like", "morn", all_values)
+
+    def pressure(self, day=0, all_values=False):
+        return self.__extract_value_set(day, "pressure", all_values)
+
+    def humidity(self, day=0, all_values=False):
+        return self.__extract_value_set(day, "humidity", all_values)
+
+    def dew_point(self, day=0, all_values=False):
+        return self.__extract_value_set(day, "dew_point", all_values)
+
+    def wind_speed(self, day=0, all_values=False):
+        return self.__extract_value_set(day, "wind_speed", all_values)
+
+    def wind_deg(self, day=0, all_values=False):
+        return self.__extract_value_set(day, "wind_deg", all_values)
+
+    def wind_gust(self, day=0, all_values=False):
+        return self.__extract_value_set(day, "wind_gust", all_values)
+
+    def clouds(self, day=0, all_values=False):
+        return self.__extract_value_set(day, "clouds", all_values)
+
+    def pop(self, day=0, all_values=False):
+        return self.__extract_value_set(day, "pop", all_values)
+
+    def uvi(self, day=0, all_values=False):
+        return self.__extract_value_set(day, "uvi", all_values)
+
+    def weather_id(self, day=0, all_values=False):
+        return self.__extract_weather_set(day, "id", all_values)
+
+    def weather_main(self, day=0, all_values=False):
+        return self.__extract_weather_set(day, "main", all_values)
+
+    def weather_description(self, day=0, all_values=False):
+        return self.__extract_weather_set(day, "description", all_values)
+
+    def weather_icon(self, day=0, all_values=False):
+        return self.__extract_weather_set(day, "icon", all_values)
+
+
+# Derived Class to handle alerts data API response
+class OneCallApiAlerts(OneCallApi):
+    def __init__(self, lat, lon, key):
+        super().__init__(lat, lon, key, "current,hourly,minutely,daily")
+
+    def __is_data_available(self, field):
+        value = False
+        if ("alerts" in self._rawdata) and (field in self._rawdata["alerts"][0]):
+            value = True
+        return value
+
+    def __extract_value_field(self, field):
+        value = "N/A"
+        if self.__is_data_available(field) is True:
+            value = self._rawdata["alerts"][0][field]
+        logger.debug("Value for %s is: %s", field, value)
+        return value
+
+    def __extract_date_field(self, field, metrics=0):
+        value = "N/A"
+        if self.__is_data_available(field) is True:
+            if metrics == 0:
+                dt = datetime.fromtimestamp(self._rawdata["alerts"][0][field])
+                value = f"{dt:%Y-%m-%d %H:%M:%S}"
+            else:
+                value = self._rawdata["alerts"][0][field]
+        logger.debug("Value for %s is: %s", field, value)
+        return value
+
+    def raw_data_alerts(self):
+        value = dict()
+        if "alerts" in self._rawdata:
+            value = self._rawdata["alerts"]
+        return value
+
+    def sender_name(self):
+        return self.__extract_value_field("sender_name")
+
+    def event(self):
+        return self.__extract_value_field("event")
+
+    def start_dt(self, metrics=0):
+        return self.__extract_date_field("start", metrics)
+
+    def end_dt(self, metrics=0):
+        return self.__extract_date_field("end", metrics)
+
+    def description(self):
+        return self.__extract_value_field("description")
+
+    def tags(self):
+        return self.__extract_value_field("tags")
 
 
 # End of module OpenWeatherMap for OneCallApi

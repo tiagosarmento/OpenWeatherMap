@@ -5,10 +5,7 @@ LAT = 45.1234
 LON = 1.2345
 KEY = "abcdef1234567890abcdef1234567890"
 EXC = "minutely,daily,hourly,alerts"
-URL = (
-    f"https://api.openweathermap.org/data/2.5/onecall?lat={LAT}&lon={LON}"
-    f"&exclude={EXC}&units=metric&appid={KEY}"
-)
+URL = f"https://api.openweathermap.org/data/2.5/onecall?lat={LAT}&lon={LON}" f"&exclude={EXC}&units=metric&appid={KEY}"
 
 RAW_DATA_CURRENT = {
     "lat": 45.1234,
@@ -29,9 +26,7 @@ RAW_DATA_CURRENT = {
         "visibility": 10000,
         "wind_speed": 2.57,
         "wind_deg": 110,
-        "weather": [
-            {"id": 800, "main": "Clear", "description": "clear sky", "icon": "01d"}
-        ],
+        "weather": [{"id": 800, "main": "Clear", "description": "clear sky", "icon": "01d"}],
     },
 }
 
@@ -108,7 +103,7 @@ def test_0009():
     assert ocac.clouds() == RAW_DATA_CURRENT["current"]["clouds"]
 
 
-## Test: validate method uvi
+# Test: validate method uvi
 def test_0010():
     ocac = openweathermap.OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
@@ -143,7 +138,7 @@ def test_0014():
     assert ocac.wind_deg() == RAW_DATA_CURRENT["current"]["wind_deg"]
 
 
-## Test: validate method rain_volume
+# Test: validate method rain_volume
 def test_0015():
     ocac = openweathermap.OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
@@ -161,36 +156,32 @@ def test_0016():
 def test_0017():
     ocac = openweathermap.OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
-    assert (
-        ocac.weather_condition_id() == RAW_DATA_CURRENT["current"]["weather"][0]["id"]
-    )
+    assert ocac.weather_condition_id() == RAW_DATA_CURRENT["current"]["weather"][0]["id"]
 
 
 # Test: validate method weather_condition_main
 def test_0018():
     ocac = openweathermap.OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
-    assert (
-        ocac.weather_condition_main()
-        == RAW_DATA_CURRENT["current"]["weather"][0]["main"]
-    )
+    assert ocac.weather_condition_main() == RAW_DATA_CURRENT["current"]["weather"][0]["main"]
 
 
 # Test: validate method weather_condition_description
 def test_0019():
     ocac = openweathermap.OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
-    assert (
-        ocac.weather_condition_description()
-        == RAW_DATA_CURRENT["current"]["weather"][0]["description"]
-    )
+    assert ocac.weather_condition_description() == RAW_DATA_CURRENT["current"]["weather"][0]["description"]
 
 
 # Test: validate method weather_condition_icon
 def test_0020():
     ocac = openweathermap.OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
-    assert (
-        ocac.weather_condition_icon()
-        == RAW_DATA_CURRENT["current"]["weather"][0]["icon"]
-    )
+    assert ocac.weather_condition_icon() == RAW_DATA_CURRENT["current"]["weather"][0]["icon"]
+
+
+# Test: validate method raw data current
+def test_0021():
+    ocac = openweathermap.OneCallApiCurrent(LAT, LON, KEY)
+    ocac._rawdata = RAW_DATA_CURRENT
+    assert ocac.raw_data_current() == RAW_DATA_CURRENT["current"]
