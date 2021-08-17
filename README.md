@@ -1,4 +1,13 @@
-# POCA - Process One Call Api
+# POCAR - Process One Call Api Response
+---
+
+![Code QL Analysis](https://github.com/tiagosarmento/OpenWeatherMap/actions/workflows/codeql-analysis.yml/badge.svg)
+![FLake8 Lint Analysis](https://github.com/tiagosarmento/OpenWeatherMap/actions/workflows/flake8-analysis.yml/badge.svg)
+![Pytest Analysis](https://github.com/tiagosarmento/OpenWeatherMap/actions/workflows/pytest-analysis.yml/badge.svg)
+![License: MIT](https://img.shields.io/github/license/tiagosarmento/OpenWeatherMap)
+![Code Style Black](https://img.shields.io/badge/code%20style-black-000000.svg)
+
+---
 
 This python module aims to process Open Weather data provided by One Call API.
 The access to One Call API is free, but an account in Open Weather is required, see: [OpenWeather Account](https://openweathermap.org/full-price#current)
@@ -15,11 +24,3 @@ See full documentation for One Call API: [One Call API documentation](https://op
 This python module processes the One Call Api response, making data available to user.
 
 For further details refer to [wiki](https://github.com/tiagosarmento/OpenWeatherMap/wiki)
-
-# Project Status
-
-![Code QL Analysis](https://github.com/tiagosarmento/OpenWeatherMap/actions/workflows/codeql-analysis.yml/badge.svg)
-![FLake8 Lint Analysis](https://github.com/tiagosarmento/OpenWeatherMap/actions/workflows/flake8-analysis.yml/badge.svg)
-![Pytest Analysis](https://github.com/tiagosarmento/OpenWeatherMap/actions/workflows/pytest-analysis.yml/badge.svg)
-![License: MIT](https://img.shields.io/github/license/tiagosarmento/OpenWeatherMap)
-![Code Style Black](https://img.shields.io/badge/code%20style-black-000000.svg)
