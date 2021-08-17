@@ -6,7 +6,7 @@ LAT = 45.1234
 LON = 1.2345
 KEY = "abcdef1234567890abcdef1234567890"
 EXC = "current,hourly,minutely,alerts"
-URL = f"https://api.openweathermap.org/data/2.5/onecall?lat={LAT}&lon={LON}" f"&exclude={EXC}&units=metric&appid={KEY}"
+URL = f"https://api.openweathermap.org/data/2.5/onecall?lat={LAT}&lon={LON}&exclude={EXC}&units=metric&appid={KEY}"
 
 RAW_DATA_DAILY = {
     "lat": 43.5832,
@@ -436,29 +436,29 @@ def test_0025():
     validate_temp_func(ocad.feels_like_morn, "feels_like", "morn")
 
 
-# Test: validate method weather_id
+# Test: validate method weather_condition_id
 def test_0026():
     ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
-    validate_weather_func(ocad.weather_id, "id")
+    validate_weather_func(ocad.weather_condition_id, "id")
 
 
-# Test: validate method weather_main
+# Test: validate method weather_condition_main
 def test_0027():
     ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
-    validate_weather_func(ocad.weather_main, "main")
+    validate_weather_func(ocad.weather_condition_main, "main")
 
 
-# Test: validate method weather_description
+# Test: validate method weather_condition_description
 def test_0028():
     ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
-    validate_weather_func(ocad.weather_description, "description")
+    validate_weather_func(ocad.weather_condition_description, "description")
 
 
-# Test: validate method weather_icon
+# Test: validate method weather_condition_icon
 def test_0029():
     ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
-    validate_weather_func(ocad.weather_icon, "icon")
+    validate_weather_func(ocad.weather_condition_icon, "icon")

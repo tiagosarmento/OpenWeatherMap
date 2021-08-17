@@ -6,7 +6,7 @@ LAT = 45.1234
 LON = 1.2345
 KEY = "abcdef1234567890abcdef1234567890"
 EXC = "current,daily,hourly,alerts"
-URL = f"https://api.openweathermap.org/data/2.5/onecall?lat={LAT}&lon={LON}" f"&exclude={EXC}&units=metric&appid={KEY}"
+URL = f"https://api.openweathermap.org/data/2.5/onecall?lat={LAT}&lon={LON}&exclude={EXC}&units=metric&appid={KEY}"
 
 RAW_DATA_MINUTELY = {
     "lat": 43.5832,

@@ -683,16 +683,16 @@ class OneCallApiDaily(OneCallApi):
     def uvi(self, day=0, all_values=False):
         return self.__extract_value_set(day, "uvi", all_values)
 
-    def weather_id(self, day=0, all_values=False):
+    def weather_condition_id(self, day=0, all_values=False):
         return self.__extract_weather_set(day, "id", all_values)
 
-    def weather_main(self, day=0, all_values=False):
+    def weather_condition_main(self, day=0, all_values=False):
         return self.__extract_weather_set(day, "main", all_values)
 
-    def weather_description(self, day=0, all_values=False):
+    def weather_condition_description(self, day=0, all_values=False):
         return self.__extract_weather_set(day, "description", all_values)
 
-    def weather_icon(self, day=0, all_values=False):
+    def weather_condition_icon(self, day=0, all_values=False):
         return self.__extract_weather_set(day, "icon", all_values)
 
 
