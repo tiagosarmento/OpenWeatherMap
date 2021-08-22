@@ -1,16 +1,21 @@
 # POCAR - Process One Call Api Response
+
 ---
 
 ![Code QL Analysis](https://github.com/tiagosarmento/pocar/actions/workflows/codeql-analysis.yml/badge.svg)
 ![FLake8 Lint Analysis](https://github.com/tiagosarmento/pocar/actions/workflows/flake8-analysis.yml/badge.svg)
 ![Pytest Analysis](https://github.com/tiagosarmento/pocar/actions/workflows/pytest-analysis.yml/badge.svg)
-
 ![Code Style Black](https://img.shields.io/badge/code%20style-black-000000.svg)
+![Python Versions](https://img.shields.io/pypi/pyversions/pocar)
 ![License: MIT](https://img.shields.io/github/license/tiagosarmento/pocar)
 
 ![Release Date](https://img.shields.io/github/release-date/tiagosarmento/pocar)
 ![Release Version](https://img.shields.io/github/v/release/tiagosarmento/pocar)
 ![Tag Version](https://img.shields.io/github/v/tag/tiagosarmento/pocar)
+
+![Pypi Version](https://img.shields.io/pypi/v/pocar)
+![Pypi Status](https://img.shields.io/pypi/status/pocar)
+![Pypi License](https://img.shields.io/pypi/l/pocar)
 
 ---
 
