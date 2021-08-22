@@ -1,4 +1,4 @@
-import openweathermap
+from pocar.OneCallApiDaily import OneCallApiDaily
 import pytest
 
 # CONSTANT DATA
@@ -181,7 +181,7 @@ RAW_DATA_DAILY = {
 
 
 def validate_date_func(func, field):
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     # case greater than
     with pytest.raises(ValueError):
@@ -199,7 +199,7 @@ def validate_date_func(func, field):
 
 
 def validate_value_func(func, field):
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     # case greater than
     with pytest.raises(ValueError):
@@ -217,7 +217,7 @@ def validate_value_func(func, field):
 
 
 def validate_temp_func(func, group, field):
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     # case greater than
     with pytest.raises(ValueError):
@@ -235,7 +235,7 @@ def validate_temp_func(func, group, field):
 
 
 def validate_weather_func(func, field):
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     # case greater than
     with pytest.raises(ValueError):
@@ -254,7 +254,7 @@ def validate_weather_func(func, field):
 
 # Test: validate constructor nominal case
 def test_0000():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     assert ocad.lat == LAT
     assert ocad.lon == LON
     assert ocad.key == KEY
@@ -263,202 +263,202 @@ def test_0000():
 
 # Test: validate method raw_data_daily
 def test_0001():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     assert ocad.raw_data_daily() == RAW_DATA_DAILY["daily"]
 
 
 # Test: validate method data_time
 def test_0002():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_date_func(ocad.data_time, "dt")
 
 
 # Test: validate method sunrise
 def test_0003():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_date_func(ocad.sunrise, "sunrise")
 
 
 # Test: validate method sunset
 def test_0004():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_date_func(ocad.sunset, "sunset")
 
 
 # Test: validate method moonrise
 def test_0005():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_date_func(ocad.moonrise, "moonrise")
 
 
 # Test: validate method moonset
 def test_0006():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_date_func(ocad.moonset, "moonset")
 
 
 # Test: validate method pressure
 def test_0007():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_value_func(ocad.pressure, "pressure")
 
 
 # Test: validate method humidity
 def test_0008():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_value_func(ocad.humidity, "humidity")
 
 
 # Test: validate method dew_point
 def test_0009():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_value_func(ocad.dew_point, "dew_point")
 
 
 # Test: validate method wind_speed
 def test_0010():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_value_func(ocad.wind_speed, "wind_speed")
 
 
 # Test: validate method wind_deg
 def test_0011():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_value_func(ocad.wind_deg, "wind_deg")
 
 
 # Test: validate method wind_gust
 def test_0012():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_value_func(ocad.wind_gust, "wind_gust")
 
 
 # Test: validate method clouds
 def test_0013():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_value_func(ocad.clouds, "clouds")
 
 
 # Test: validate method pop
 def test_0014():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_value_func(ocad.pop, "pop")
 
 
 # Test: validate method uvi
 def test_0015():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_value_func(ocad.uvi, "uvi")
 
 
 # Test: validate method temp_min
 def test_0016():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.temp_min, "temp", "min")
 
 
 # Test: validate method temp_max
 def test_0017():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.temp_max, "temp", "max")
 
 
 # Test: validate method temp_day
 def test_0018():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.temp_day, "temp", "day")
 
 
 # Test: validate method temp_night
 def test_0019():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.temp_night, "temp", "night")
 
 
 # Test: validate method temp_eve
 def test_0020():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.temp_eve, "temp", "eve")
 
 
 # Test: validate method temp_morn
 def test_0021():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.temp_morn, "temp", "morn")
 
 
 # Test: validate method feels_like_day
 def test_0022():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.feels_like_day, "feels_like", "day")
 
 
 # Test: validate method feels_like_night
 def test_0023():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.feels_like_night, "feels_like", "night")
 
 
 # Test: validate method feels_like_eve
 def test_0024():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.feels_like_eve, "feels_like", "eve")
 
 
 # Test: validate method feels_like_morn
 def test_0025():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.feels_like_morn, "feels_like", "morn")
 
 
 # Test: validate method weather_condition_id
 def test_0026():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_weather_func(ocad.weather_condition_id, "id")
 
 
 # Test: validate method weather_condition_main
 def test_0027():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_weather_func(ocad.weather_condition_main, "main")
 
 
 # Test: validate method weather_condition_description
 def test_0028():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_weather_func(ocad.weather_condition_description, "description")
 
 
 # Test: validate method weather_condition_icon
 def test_0029():
-    ocad = openweathermap.OneCallApiDaily(LAT, LON, KEY)
+    ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_weather_func(ocad.weather_condition_icon, "icon")

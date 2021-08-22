@@ -1,4 +1,4 @@
-import openweathermap
+from pocar.OneCallApiMinutely import OneCallApiMinutely
 import pytest
 
 # CONSTANT DATA
@@ -81,7 +81,7 @@ RAW_DATA_MINUTELY = {
 
 # Test: validate constructor nominal case
 def test_0000():
-    ocam = openweathermap.OneCallApiMinutely(LAT, LON, KEY)
+    ocam = OneCallApiMinutely(LAT, LON, KEY)
     assert ocam.lat == LAT
     assert ocam.lon == LON
     assert ocam.key == KEY
@@ -90,14 +90,14 @@ def test_0000():
 
 # Test: validate method raw data minutely
 def test_0001():
-    ocam = openweathermap.OneCallApiMinutely(LAT, LON, KEY)
+    ocam = OneCallApiMinutely(LAT, LON, KEY)
     ocam._rawdata = RAW_DATA_MINUTELY
     assert ocam.raw_data_minutely() == RAW_DATA_MINUTELY["minutely"]
 
 
 # Test: validate method precipitation
 def test_0002():
-    ocam = openweathermap.OneCallApiMinutely(LAT, LON, KEY)
+    ocam = OneCallApiMinutely(LAT, LON, KEY)
     ocam._rawdata = RAW_DATA_MINUTELY
     # case greater than
     with pytest.raises(ValueError):
@@ -116,7 +116,7 @@ def test_0002():
 
 # Test: validate method precipitation
 def test_0003():
-    ocam = openweathermap.OneCallApiMinutely(LAT, LON, KEY)
+    ocam = OneCallApiMinutely(LAT, LON, KEY)
     ocam._rawdata = RAW_DATA_MINUTELY
     # case greater than
     with pytest.raises(ValueError):

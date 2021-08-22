@@ -1,4 +1,4 @@
-import openweathermap
+from pocar.OneCallApiHourly import OneCallApiHourly
 import pytest
 
 # CONSTANT DATA
@@ -1032,7 +1032,7 @@ RAW_DATA_HOURLY = {
 
 
 def validate_date_func(func, field):
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     # case greater than
     with pytest.raises(ValueError):
@@ -1050,7 +1050,7 @@ def validate_date_func(func, field):
 
 
 def validate_value_func(func, field):
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     # case greater than
     with pytest.raises(ValueError):
@@ -1068,7 +1068,7 @@ def validate_value_func(func, field):
 
 
 def validate_weather_func(func, field):
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     # case greater than
     with pytest.raises(ValueError):
@@ -1087,7 +1087,7 @@ def validate_weather_func(func, field):
 
 # Test: validate constructor nominal case
 def test_0000():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     assert ocah.lat == LAT
     assert ocah.lon == LON
     assert ocah.key == KEY
@@ -1096,125 +1096,125 @@ def test_0000():
 
 # Test: validate method raw data hourly
 def test_0001():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     assert ocah.raw_data_hourly() == RAW_DATA_HOURLY["hourly"]
 
 
 # Test: validate method data_time
 def test_0002():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     validate_date_func(ocah.data_time, "dt")
 
 
 # Test: validate method temp
 def test_0003():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     validate_value_func(ocah.temp, "temp")
 
 
 # Test: validate method feels_like
 def test_0004():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     validate_value_func(ocah.feels_like, "feels_like")
 
 
 # Test: validate method pressure
 def test_0005():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     validate_value_func(ocah.pressure, "pressure")
 
 
 # Test: validate method humidity
 def test_0006():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     validate_value_func(ocah.humidity, "humidity")
 
 
 # Test: validate method dew_point
 def test_0007():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     validate_value_func(ocah.dew_point, "dew_point")
 
 
 # Test: validate method uvi
 def test_0008():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     validate_value_func(ocah.uvi, "uvi")
 
 
 # Test: validate method clouds
 def test_0009():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     validate_value_func(ocah.clouds, "clouds")
 
 
 # Test: validate method visibility
 def test_0010():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     validate_value_func(ocah.visibility, "visibility")
 
 
 # Test: validate method wind_speed
 def test_0011():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     validate_value_func(ocah.wind_speed, "wind_speed")
 
 
 # Test: validate method wind_deg
 def test_0012():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     validate_value_func(ocah.wind_deg, "wind_deg")
 
 
 # Test: validate method wind_gust
 def test_0013():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     validate_value_func(ocah.wind_gust, "wind_gust")
 
 
 # Test: validate method weather_id
 def test_0014():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     validate_weather_func(ocah.weather_id, "id")
 
 
 # Test: validate method weather_main
 def test_0015():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     validate_weather_func(ocah.weather_main, "main")
 
 
 # Test: validate method weather_description
 def test_0016():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     validate_weather_func(ocah.weather_description, "description")
 
 
 # Test: validate method weather_icon
 def test_0017():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     validate_weather_func(ocah.weather_icon, "icon")
 
 
 # Test: validate method pop
 def test_0018():
-    ocah = openweathermap.OneCallApiHourly(LAT, LON, KEY)
+    ocah = OneCallApiHourly(LAT, LON, KEY)
     ocah._rawdata = RAW_DATA_HOURLY
     validate_value_func(ocah.pop, "pop")

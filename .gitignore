@@ -1,6 +1,10 @@
 # Python
 __pycache__/
 
+# Python Packaging
+dist/
+pocar.egg-info/
+
 # Unit test / coverage reports
 .coverage
 .coverage.*

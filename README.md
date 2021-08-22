@@ -1,15 +1,15 @@
 # POCAR - Process One Call Api Response
 ---
 
-![Code QL Analysis](https://github.com/tiagosarmento/OpenWeatherMap/actions/workflows/codeql-analysis.yml/badge.svg)
-![FLake8 Lint Analysis](https://github.com/tiagosarmento/OpenWeatherMap/actions/workflows/flake8-analysis.yml/badge.svg)
-![Pytest Analysis](https://github.com/tiagosarmento/OpenWeatherMap/actions/workflows/pytest-analysis.yml/badge.svg)
-![License: MIT](https://img.shields.io/github/license/tiagosarmento/OpenWeatherMap)
+![Code QL Analysis](https://github.com/tiagosarmento/pocar/actions/workflows/codeql-analysis.yml/badge.svg)
+![FLake8 Lint Analysis](https://github.com/tiagosarmento/pocar/actions/workflows/flake8-analysis.yml/badge.svg)
+![Pytest Analysis](https://github.com/tiagosarmento/pocar/actions/workflows/pytest-analysis.yml/badge.svg)
+![License: MIT](https://img.shields.io/github/license/tiagosarmento/pocar)
 ![Code Style Black](https://img.shields.io/badge/code%20style-black-000000.svg)
 
 ---
 
-This python module aims to process Open Weather data provided by One Call API.
+This python package aims to process Open Weather data provided by One Call API.
 The access to One Call API is free, but an account in Open Weather is required, see: [OpenWeather Account](https://openweathermap.org/full-price#current)
 
 The One Call API provides the following weather data for any geographical coordinates:
@@ -21,6 +21,6 @@ The One Call API provides the following weather data for any geographical coordi
 
 See full documentation for One Call API: [One Call API documentation](https://openweathermap.org/api/one-call-api)
 
-This python module processes the One Call Api response, making data available to user.
+This python package processes the One Call Api response, making data available to user.
 
-For further details refer to [wiki](https://github.com/tiagosarmento/OpenWeatherMap/wiki)
+For further details refer to [wiki](https://github.com/tiagosarmento/pocar/wiki)
