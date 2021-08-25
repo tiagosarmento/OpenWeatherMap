@@ -5,6 +5,9 @@ __pycache__/
 dist/
 pocar.egg-info/
 
+# Sphinx
+*_build
+
 # Unit test / coverage reports
 .coverage
 .coverage.*

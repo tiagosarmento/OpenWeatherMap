@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+"""
+This module provides a base class to handle One Call Api response from OpenWeatherMap
+"""
+
 import json
 import logging
 import requests
@@ -16,10 +20,16 @@ requests.packages.urllib3.disable_warnings()
 logger = logging.getLogger(__name__)
 
 
-# Base Class to handle OneCallApi response from OpenWeatherMap
 class OneCallApi:
+    """
+    Base Class to handle OneCallApi response from OpenWeatherMap
+    """
     def __init__(self, lat, lon, key, exc=""):
         self.lat = lat
+        """
+        This function sets de lat attribute value.
+        contraints: lat expected to be within -90 90
+        """
         self.lon = lon
         self.key = key
         self.exc = exc

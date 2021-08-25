@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+"""
+This module provides a base class to handle One Call Api response from OpenWeatherMap
+"""
+
 import logging
 import requests
 
