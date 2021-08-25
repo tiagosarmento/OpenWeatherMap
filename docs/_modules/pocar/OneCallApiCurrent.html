@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>pocar.OneCallApiCurrent &mdash; POCAR 0.0.2 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> POCAR
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/readme_link.html">POCAR - Process One Call Api Response</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Code examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/code_examples/index.html">POCAR Code Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../source/code_examples/code_example_onecallapi.html">Process One Call Api base response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/code_examples/code_example_onecallapialerts.html">Process One Call Api response for Alerts data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/code_examples/code_example_onecallapicurrent.html">Process One Call Api response for Current data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/code_examples/code_example_onecallapidaily.html">Process One Call Api response for Daily data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/code_examples/code_example_onecallapihourly.html">Process One Call Api response for Hourly data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../source/code_examples/code_example_onecallapiminutely.html">Process One Call Api response for Minutely data</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">POCAR</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>pocar.OneCallApiCurrent</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pocar.OneCallApiCurrent</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module provides a base class to handle One Call Api response from OpenWeatherMap</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="kn">from</span> <span class="nn">pocar.OneCallApi</span> <span class="kn">import</span> <span class="n">OneCallApi</span>
+
+
+<span class="c1"># Uncomment this line to suppress warning message due to:</span>
+<span class="c1">#    InsecureRequestWarning: Unverified HTTPS request is being made.</span>
+<span class="c1">#    Adding certificate verification is strongly advised.</span>
+<span class="c1">#    See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings</span>
+<span class="c1"># We get this warning because an HTTP GET request is made with SSL verification disabled</span>
+<span class="n">requests</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">urllib3</span><span class="o">.</span><span class="n">disable_warnings</span><span class="p">()</span>
+
+<span class="c1"># Set local logger to the root logger, to inherit root settings</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="c1"># Derived Class to handle Current weather data API response</span>
+<div class="viewcode-block" id="OneCallApiCurrent"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent">[docs]</a><span class="k">class</span> <span class="nc">OneCallApiCurrent</span><span class="p">(</span><span class="n">OneCallApi</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="s2">&quot;minutely,daily,hourly,alerts&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__is_data_available</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;current&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rawdata</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rawdata</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">]):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">__extract_date_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;N/A&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_data_available</span><span class="p">(</span><span class="n">field</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">metrics</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rawdata</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">][</span><span class="n">field</span><span class="p">])</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dt</span><span class="si">:</span><span class="s2">%Y-%m-%d %H:%M:%S</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rawdata</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">][</span><span class="n">field</span><span class="p">]</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Value for </span><span class="si">%s</span><span class="s2"> is: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">__extract_value_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;N/A&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_data_available</span><span class="p">(</span><span class="n">field</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rawdata</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">][</span><span class="n">field</span><span class="p">]</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Value for </span><span class="si">%s</span><span class="s2"> is: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">__extract_weather_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;N/A&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_data_available</span><span class="p">(</span><span class="s2">&quot;weather&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rawdata</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">][</span><span class="s2">&quot;weather&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rawdata</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">][</span><span class="s2">&quot;weather&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="n">field</span><span class="p">]</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Value for </span><span class="si">%s</span><span class="s2"> is: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="OneCallApiCurrent.raw_data_current"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.raw_data_current">[docs]</a>    <span class="k">def</span> <span class="nf">raw_data_current</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s2">&quot;current&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rawdata</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rawdata</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">value</span></div>
+
+    <span class="c1"># Get Current time, Unix, UTC</span>
+    <span class="c1"># metrics defaults to 0: date in human readable format</span>
+    <span class="c1"># any other value, date is represented as UNIX seconds</span>
+<div class="viewcode-block" id="OneCallApiCurrent.data_time"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.data_time">[docs]</a>    <span class="k">def</span> <span class="nf">data_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extract_date_field</span><span class="p">(</span><span class="s2">&quot;dt&quot;</span><span class="p">,</span> <span class="n">metrics</span><span class="p">)</span></div>
+
+    <span class="c1"># Get Sunrise time, Unix, UTC</span>
+<div class="viewcode-block" id="OneCallApiCurrent.sunrise"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.sunrise">[docs]</a>    <span class="k">def</span> <span class="nf">sunrise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extract_date_field</span><span class="p">(</span><span class="s2">&quot;sunrise&quot;</span><span class="p">,</span> <span class="n">metrics</span><span class="p">)</span></div>
+
+    <span class="c1"># Get Sunset time, Unix, UTC</span>
+<div class="viewcode-block" id="OneCallApiCurrent.sunset"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.sunset">[docs]</a>    <span class="k">def</span> <span class="nf">sunset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extract_date_field</span><span class="p">(</span><span class="s2">&quot;sunset&quot;</span><span class="p">,</span> <span class="n">metrics</span><span class="p">)</span></div>
+
+    <span class="c1"># Get Current Temperature</span>
+<div class="viewcode-block" id="OneCallApiCurrent.temperature"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.temperature">[docs]</a>    <span class="k">def</span> <span class="nf">temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extract_value_field</span><span class="p">(</span><span class="s2">&quot;temp&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># Get Current Temperature feel</span>
+<div class="viewcode-block" id="OneCallApiCurrent.temperature_feels_like"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.temperature_feels_like">[docs]</a>    <span class="k">def</span> <span class="nf">temperature_feels_like</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extract_value_field</span><span class="p">(</span><span class="s2">&quot;feels_like&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># Get Current Atmospheric pressure on the sea level, hPa</span>
+<div class="viewcode-block" id="OneCallApiCurrent.pressure"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.pressure">[docs]</a>    <span class="k">def</span> <span class="nf">pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extract_value_field</span><span class="p">(</span><span class="s2">&quot;pressure&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># Get Current Humidity, %</span>
+<div class="viewcode-block" id="OneCallApiCurrent.humidity"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.humidity">[docs]</a>    <span class="k">def</span> <span class="nf">humidity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extract_value_field</span><span class="p">(</span><span class="s2">&quot;humidity&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># Get Current Atmospheric temperature</span>
+<div class="viewcode-block" id="OneCallApiCurrent.dew_point"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.dew_point">[docs]</a>    <span class="k">def</span> <span class="nf">dew_point</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extract_value_field</span><span class="p">(</span><span class="s2">&quot;dew_point&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># Get Current Cloudiness, %</span>
+<div class="viewcode-block" id="OneCallApiCurrent.clouds"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.clouds">[docs]</a>    <span class="k">def</span> <span class="nf">clouds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extract_value_field</span><span class="p">(</span><span class="s2">&quot;clouds&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># Get Current UV index</span>
+<div class="viewcode-block" id="OneCallApiCurrent.uvi"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.uvi">[docs]</a>    <span class="k">def</span> <span class="nf">uvi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extract_value_field</span><span class="p">(</span><span class="s2">&quot;uvi&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># Get Current Average visibility, metres</span>
+<div class="viewcode-block" id="OneCallApiCurrent.visibility"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.visibility">[docs]</a>    <span class="k">def</span> <span class="nf">visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extract_value_field</span><span class="p">(</span><span class="s2">&quot;visibility&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># Get Current Wind speed (m/s)</span>
+<div class="viewcode-block" id="OneCallApiCurrent.wind_speed"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.wind_speed">[docs]</a>    <span class="k">def</span> <span class="nf">wind_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extract_value_field</span><span class="p">(</span><span class="s2">&quot;wind_speed&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># Get Current Wind gust (where available)</span>
+<div class="viewcode-block" id="OneCallApiCurrent.wind_gust"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.wind_gust">[docs]</a>    <span class="k">def</span> <span class="nf">wind_gust</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extract_value_field</span><span class="p">(</span><span class="s2">&quot;wind_gust&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># Get Current Wind direction, degrees (meteorological)</span>
+<div class="viewcode-block" id="OneCallApiCurrent.wind_deg"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.wind_deg">[docs]</a>    <span class="k">def</span> <span class="nf">wind_deg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extract_value_field</span><span class="p">(</span><span class="s2">&quot;wind_deg&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># Get Current Rain volume for last hour, mm (where available)</span>
+<div class="viewcode-block" id="OneCallApiCurrent.rain_volume"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.rain_volume">[docs]</a>    <span class="k">def</span> <span class="nf">rain_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;N/A&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_data_available</span><span class="p">(</span><span class="s2">&quot;rain&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;1h&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rawdata</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">][</span><span class="s2">&quot;rain&quot;</span><span class="p">]:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rawdata</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">][</span><span class="s2">&quot;rain&quot;</span><span class="p">][</span><span class="s2">&quot;1h&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">value</span></div>
+
+    <span class="c1"># Get Current Snow volume for last hour, mm (where available)</span>
+<div class="viewcode-block" id="OneCallApiCurrent.snow_volume"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.snow_volume">[docs]</a>    <span class="k">def</span> <span class="nf">snow_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;N/A&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_data_available</span><span class="p">(</span><span class="s2">&quot;snow&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;1h&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rawdata</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">][</span><span class="s2">&quot;snow&quot;</span><span class="p">]:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rawdata</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">][</span><span class="s2">&quot;snow&quot;</span><span class="p">][</span><span class="s2">&quot;1h&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">value</span></div>
+
+    <span class="c1"># Get Current Weather condition id</span>
+<div class="viewcode-block" id="OneCallApiCurrent.weather_condition_id"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.weather_condition_id">[docs]</a>    <span class="k">def</span> <span class="nf">weather_condition_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extract_weather_field</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># Get Group of weather parameters (Rain, Snow, Extreme etc.)</span>
+<div class="viewcode-block" id="OneCallApiCurrent.weather_condition_main"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.weather_condition_main">[docs]</a>    <span class="k">def</span> <span class="nf">weather_condition_main</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extract_weather_field</span><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># Get Weather condition within the group (full list of weather conditions)</span>
+<div class="viewcode-block" id="OneCallApiCurrent.weather_condition_description"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.weather_condition_description">[docs]</a>    <span class="k">def</span> <span class="nf">weather_condition_description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extract_weather_field</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># Get Weather icon id. How to get icons</span>
+    <span class="c1">#  http://openweathermap.org/img/wn/&lt;icon_id&gt;@2x.png</span>
+<div class="viewcode-block" id="OneCallApiCurrent.weather_condition_icon"><a class="viewcode-back" href="../../source/pocar.html#pocar.OneCallApiCurrent.OneCallApiCurrent.weather_condition_icon">[docs]</a>    <span class="k">def</span> <span class="nf">weather_condition_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extract_weather_field</span><span class="p">(</span><span class="s2">&quot;icon&quot;</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Tiago Santos.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

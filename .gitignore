@@ -8,6 +8,9 @@ pocar.egg-info/
 # Sphinx
 *_build
 
+# GitHubPages from Sphinx output
+*docs/.buildinfo
+
 # Unit test / coverage reports
 .coverage
 .coverage.*

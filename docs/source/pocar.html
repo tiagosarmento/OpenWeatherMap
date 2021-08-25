@@ -1,0 +1,727 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>pocar package &mdash; POCAR 0.0.2 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> POCAR
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html">POCAR - Process One Call Api Response</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Code examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="code_examples/index.html">POCAR Code Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code_examples/code_example_onecallapi.html">Process One Call Api base response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_examples/code_example_onecallapialerts.html">Process One Call Api response for Alerts data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_examples/code_example_onecallapicurrent.html">Process One Call Api response for Current data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_examples/code_example_onecallapidaily.html">Process One Call Api response for Daily data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_examples/code_example_onecallapihourly.html">Process One Call Api response for Hourly data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_examples/code_example_onecallapiminutely.html">Process One Call Api response for Minutely data</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">POCAR</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>pocar package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/source/pocar.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pocar-package">
+<h1>pocar package<a class="headerlink" href="#pocar-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pocar.OneCallApi">
+<span id="pocar-onecallapi-module"></span><h2>pocar.OneCallApi module<a class="headerlink" href="#module-pocar.OneCallApi" title="Permalink to this headline">¶</a></h2>
+<p>This module provides a base class to handle One Call Api response from OpenWeatherMap</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pocar.OneCallApi.OneCallApi">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pocar.OneCallApi.</span></span><span class="sig-name descname"><span class="pre">OneCallApi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApi.html#OneCallApi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApi.OneCallApi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base Class to handle OneCallApi response from OpenWeatherMap</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApi.OneCallApi.config">
+<span class="sig-name descname"><span class="pre">config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApi.html#OneCallApi.config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApi.OneCallApi.config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pocar.OneCallApi.OneCallApi.exc">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">exc</span></span><a class="headerlink" href="#pocar.OneCallApi.OneCallApi.exc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pocar.OneCallApi.OneCallApi.key">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">key</span></span><a class="headerlink" href="#pocar.OneCallApi.OneCallApi.key" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pocar.OneCallApi.OneCallApi.lat">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">lat</span></span><a class="headerlink" href="#pocar.OneCallApi.OneCallApi.lat" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function sets de lat attribute value.
+contraints: lat expected to be within -90 90</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pocar.OneCallApi.OneCallApi.lon">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">lon</span></span><a class="headerlink" href="#pocar.OneCallApi.OneCallApi.lon" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApi.OneCallApi.raw_data">
+<span class="sig-name descname"><span class="pre">raw_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApi.html#OneCallApi.raw_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApi.OneCallApi.raw_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApi.OneCallApi.timestamp">
+<span class="sig-name descname"><span class="pre">timestamp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApi.html#OneCallApi.timestamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApi.OneCallApi.timestamp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApi.OneCallApi.timezone">
+<span class="sig-name descname"><span class="pre">timezone</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApi.html#OneCallApi.timezone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApi.OneCallApi.timezone" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApi.OneCallApi.timezone_offset">
+<span class="sig-name descname"><span class="pre">timezone_offset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApi.html#OneCallApi.timezone_offset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApi.OneCallApi.timezone_offset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApi.OneCallApi.updateData">
+<span class="sig-name descname"><span class="pre">updateData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApi.html#OneCallApi.updateData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApi.OneCallApi.updateData" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pocar.OneCallApiAlerts">
+<span id="pocar-onecallapialerts-module"></span><h2>pocar.OneCallApiAlerts module<a class="headerlink" href="#module-pocar.OneCallApiAlerts" title="Permalink to this headline">¶</a></h2>
+<p>This module provides a base class to handle One Call Api response from OpenWeatherMap</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pocar.OneCallApiAlerts.OneCallApiAlerts">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pocar.OneCallApiAlerts.</span></span><span class="sig-name descname"><span class="pre">OneCallApiAlerts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiAlerts.html#OneCallApiAlerts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiAlerts.OneCallApiAlerts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pocar.OneCallApi.OneCallApi" title="pocar.OneCallApi.OneCallApi"><code class="xref py py-class docutils literal notranslate"><span class="pre">pocar.OneCallApi.OneCallApi</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiAlerts.OneCallApiAlerts.description">
+<span class="sig-name descname"><span class="pre">description</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiAlerts.html#OneCallApiAlerts.description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiAlerts.OneCallApiAlerts.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiAlerts.OneCallApiAlerts.end_dt">
+<span class="sig-name descname"><span class="pre">end_dt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiAlerts.html#OneCallApiAlerts.end_dt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiAlerts.OneCallApiAlerts.end_dt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiAlerts.OneCallApiAlerts.event">
+<span class="sig-name descname"><span class="pre">event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiAlerts.html#OneCallApiAlerts.event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiAlerts.OneCallApiAlerts.event" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiAlerts.OneCallApiAlerts.raw_data_alerts">
+<span class="sig-name descname"><span class="pre">raw_data_alerts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiAlerts.html#OneCallApiAlerts.raw_data_alerts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiAlerts.OneCallApiAlerts.raw_data_alerts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiAlerts.OneCallApiAlerts.sender_name">
+<span class="sig-name descname"><span class="pre">sender_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiAlerts.html#OneCallApiAlerts.sender_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiAlerts.OneCallApiAlerts.sender_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiAlerts.OneCallApiAlerts.start_dt">
+<span class="sig-name descname"><span class="pre">start_dt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiAlerts.html#OneCallApiAlerts.start_dt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiAlerts.OneCallApiAlerts.start_dt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiAlerts.OneCallApiAlerts.tags">
+<span class="sig-name descname"><span class="pre">tags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiAlerts.html#OneCallApiAlerts.tags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiAlerts.OneCallApiAlerts.tags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pocar.OneCallApiCurrent">
+<span id="pocar-onecallapicurrent-module"></span><h2>pocar.OneCallApiCurrent module<a class="headerlink" href="#module-pocar.OneCallApiCurrent" title="Permalink to this headline">¶</a></h2>
+<p>This module provides a base class to handle One Call Api response from OpenWeatherMap</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pocar.OneCallApiCurrent.</span></span><span class="sig-name descname"><span class="pre">OneCallApiCurrent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pocar.OneCallApi.OneCallApi" title="pocar.OneCallApi.OneCallApi"><code class="xref py py-class docutils literal notranslate"><span class="pre">pocar.OneCallApi.OneCallApi</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.clouds">
+<span class="sig-name descname"><span class="pre">clouds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.clouds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.clouds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.data_time">
+<span class="sig-name descname"><span class="pre">data_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.data_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.data_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.dew_point">
+<span class="sig-name descname"><span class="pre">dew_point</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.dew_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.dew_point" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.humidity">
+<span class="sig-name descname"><span class="pre">humidity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.humidity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.humidity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.pressure">
+<span class="sig-name descname"><span class="pre">pressure</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.pressure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.pressure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.rain_volume">
+<span class="sig-name descname"><span class="pre">rain_volume</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.rain_volume"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.rain_volume" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.raw_data_current">
+<span class="sig-name descname"><span class="pre">raw_data_current</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.raw_data_current"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.raw_data_current" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.snow_volume">
+<span class="sig-name descname"><span class="pre">snow_volume</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.snow_volume"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.snow_volume" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.sunrise">
+<span class="sig-name descname"><span class="pre">sunrise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.sunrise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.sunrise" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.sunset">
+<span class="sig-name descname"><span class="pre">sunset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.sunset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.sunset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.temperature">
+<span class="sig-name descname"><span class="pre">temperature</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.temperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.temperature" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.temperature_feels_like">
+<span class="sig-name descname"><span class="pre">temperature_feels_like</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.temperature_feels_like"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.temperature_feels_like" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.uvi">
+<span class="sig-name descname"><span class="pre">uvi</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.uvi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.uvi" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.visibility">
+<span class="sig-name descname"><span class="pre">visibility</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.visibility"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.visibility" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.weather_condition_description">
+<span class="sig-name descname"><span class="pre">weather_condition_description</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.weather_condition_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.weather_condition_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.weather_condition_icon">
+<span class="sig-name descname"><span class="pre">weather_condition_icon</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.weather_condition_icon"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.weather_condition_icon" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.weather_condition_id">
+<span class="sig-name descname"><span class="pre">weather_condition_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.weather_condition_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.weather_condition_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.weather_condition_main">
+<span class="sig-name descname"><span class="pre">weather_condition_main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.weather_condition_main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.weather_condition_main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.wind_deg">
+<span class="sig-name descname"><span class="pre">wind_deg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.wind_deg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.wind_deg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.wind_gust">
+<span class="sig-name descname"><span class="pre">wind_gust</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.wind_gust"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.wind_gust" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiCurrent.OneCallApiCurrent.wind_speed">
+<span class="sig-name descname"><span class="pre">wind_speed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiCurrent.html#OneCallApiCurrent.wind_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiCurrent.OneCallApiCurrent.wind_speed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pocar.OneCallApiDaily">
+<span id="pocar-onecallapidaily-module"></span><h2>pocar.OneCallApiDaily module<a class="headerlink" href="#module-pocar.OneCallApiDaily" title="Permalink to this headline">¶</a></h2>
+<p>This module provides a base class to handle One Call Api response from OpenWeatherMap</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pocar.OneCallApiDaily.</span></span><span class="sig-name descname"><span class="pre">OneCallApiDaily</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pocar.OneCallApi.OneCallApi" title="pocar.OneCallApi.OneCallApi"><code class="xref py py-class docutils literal notranslate"><span class="pre">pocar.OneCallApi.OneCallApi</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.clouds">
+<span class="sig-name descname"><span class="pre">clouds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.clouds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.clouds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.data_time">
+<span class="sig-name descname"><span class="pre">data_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.data_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.data_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.dew_point">
+<span class="sig-name descname"><span class="pre">dew_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.dew_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.dew_point" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.feels_like_day">
+<span class="sig-name descname"><span class="pre">feels_like_day</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.feels_like_day"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.feels_like_day" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.feels_like_eve">
+<span class="sig-name descname"><span class="pre">feels_like_eve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.feels_like_eve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.feels_like_eve" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.feels_like_morn">
+<span class="sig-name descname"><span class="pre">feels_like_morn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.feels_like_morn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.feels_like_morn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.feels_like_night">
+<span class="sig-name descname"><span class="pre">feels_like_night</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.feels_like_night"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.feels_like_night" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.humidity">
+<span class="sig-name descname"><span class="pre">humidity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.humidity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.humidity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.moonrise">
+<span class="sig-name descname"><span class="pre">moonrise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.moonrise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.moonrise" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.moonset">
+<span class="sig-name descname"><span class="pre">moonset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.moonset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.moonset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.pop">
+<span class="sig-name descname"><span class="pre">pop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.pop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.pop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.pressure">
+<span class="sig-name descname"><span class="pre">pressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.pressure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.pressure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.raw_data_daily">
+<span class="sig-name descname"><span class="pre">raw_data_daily</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.raw_data_daily"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.raw_data_daily" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.sunrise">
+<span class="sig-name descname"><span class="pre">sunrise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.sunrise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.sunrise" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.sunset">
+<span class="sig-name descname"><span class="pre">sunset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.sunset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.sunset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.temp_day">
+<span class="sig-name descname"><span class="pre">temp_day</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.temp_day"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.temp_day" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.temp_eve">
+<span class="sig-name descname"><span class="pre">temp_eve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.temp_eve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.temp_eve" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.temp_max">
+<span class="sig-name descname"><span class="pre">temp_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.temp_max"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.temp_max" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.temp_min">
+<span class="sig-name descname"><span class="pre">temp_min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.temp_min"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.temp_min" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.temp_morn">
+<span class="sig-name descname"><span class="pre">temp_morn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.temp_morn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.temp_morn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.temp_night">
+<span class="sig-name descname"><span class="pre">temp_night</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.temp_night"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.temp_night" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.uvi">
+<span class="sig-name descname"><span class="pre">uvi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.uvi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.uvi" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.weather_condition_description">
+<span class="sig-name descname"><span class="pre">weather_condition_description</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.weather_condition_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.weather_condition_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.weather_condition_icon">
+<span class="sig-name descname"><span class="pre">weather_condition_icon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.weather_condition_icon"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.weather_condition_icon" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.weather_condition_id">
+<span class="sig-name descname"><span class="pre">weather_condition_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.weather_condition_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.weather_condition_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.weather_condition_main">
+<span class="sig-name descname"><span class="pre">weather_condition_main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.weather_condition_main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.weather_condition_main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.wind_deg">
+<span class="sig-name descname"><span class="pre">wind_deg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.wind_deg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.wind_deg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.wind_gust">
+<span class="sig-name descname"><span class="pre">wind_gust</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.wind_gust"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.wind_gust" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiDaily.OneCallApiDaily.wind_speed">
+<span class="sig-name descname"><span class="pre">wind_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiDaily.html#OneCallApiDaily.wind_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiDaily.OneCallApiDaily.wind_speed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pocar.OneCallApiHourly">
+<span id="pocar-onecallapihourly-module"></span><h2>pocar.OneCallApiHourly module<a class="headerlink" href="#module-pocar.OneCallApiHourly" title="Permalink to this headline">¶</a></h2>
+<p>This module provides a base class to handle One Call Api response from OpenWeatherMap</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pocar.OneCallApiHourly.</span></span><span class="sig-name descname"><span class="pre">OneCallApiHourly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pocar.OneCallApi.OneCallApi" title="pocar.OneCallApi.OneCallApi"><code class="xref py py-class docutils literal notranslate"><span class="pre">pocar.OneCallApi.OneCallApi</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly.clouds">
+<span class="sig-name descname"><span class="pre">clouds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly.clouds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly.clouds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly.data_time">
+<span class="sig-name descname"><span class="pre">data_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly.data_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly.data_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly.dew_point">
+<span class="sig-name descname"><span class="pre">dew_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly.dew_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly.dew_point" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly.feels_like">
+<span class="sig-name descname"><span class="pre">feels_like</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly.feels_like"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly.feels_like" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly.humidity">
+<span class="sig-name descname"><span class="pre">humidity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly.humidity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly.humidity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly.pop">
+<span class="sig-name descname"><span class="pre">pop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly.pop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly.pop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly.pressure">
+<span class="sig-name descname"><span class="pre">pressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly.pressure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly.pressure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly.raw_data_hourly">
+<span class="sig-name descname"><span class="pre">raw_data_hourly</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly.raw_data_hourly"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly.raw_data_hourly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly.temp">
+<span class="sig-name descname"><span class="pre">temp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly.temp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly.temp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly.uvi">
+<span class="sig-name descname"><span class="pre">uvi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly.uvi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly.uvi" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly.visibility">
+<span class="sig-name descname"><span class="pre">visibility</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly.visibility"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly.visibility" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly.weather_description">
+<span class="sig-name descname"><span class="pre">weather_description</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly.weather_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly.weather_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly.weather_icon">
+<span class="sig-name descname"><span class="pre">weather_icon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly.weather_icon"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly.weather_icon" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly.weather_id">
+<span class="sig-name descname"><span class="pre">weather_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly.weather_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly.weather_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly.weather_main">
+<span class="sig-name descname"><span class="pre">weather_main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly.weather_main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly.weather_main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly.wind_deg">
+<span class="sig-name descname"><span class="pre">wind_deg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly.wind_deg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly.wind_deg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly.wind_gust">
+<span class="sig-name descname"><span class="pre">wind_gust</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly.wind_gust"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly.wind_gust" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiHourly.OneCallApiHourly.wind_speed">
+<span class="sig-name descname"><span class="pre">wind_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiHourly.html#OneCallApiHourly.wind_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiHourly.OneCallApiHourly.wind_speed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pocar.OneCallApiMinutely">
+<span id="pocar-onecallapiminutely-module"></span><h2>pocar.OneCallApiMinutely module<a class="headerlink" href="#module-pocar.OneCallApiMinutely" title="Permalink to this headline">¶</a></h2>
+<p>This module provides a base class to handle One Call Api response from OpenWeatherMap</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pocar.OneCallApiMinutely.OneCallApiMinutely">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pocar.OneCallApiMinutely.</span></span><span class="sig-name descname"><span class="pre">OneCallApiMinutely</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiMinutely.html#OneCallApiMinutely"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiMinutely.OneCallApiMinutely" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pocar.OneCallApi.OneCallApi" title="pocar.OneCallApi.OneCallApi"><code class="xref py py-class docutils literal notranslate"><span class="pre">pocar.OneCallApi.OneCallApi</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiMinutely.OneCallApiMinutely.data_time">
+<span class="sig-name descname"><span class="pre">data_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiMinutely.html#OneCallApiMinutely.data_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiMinutely.OneCallApiMinutely.data_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiMinutely.OneCallApiMinutely.precipitation">
+<span class="sig-name descname"><span class="pre">precipitation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiMinutely.html#OneCallApiMinutely.precipitation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiMinutely.OneCallApiMinutely.precipitation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pocar.OneCallApiMinutely.OneCallApiMinutely.raw_data_minutely">
+<span class="sig-name descname"><span class="pre">raw_data_minutely</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pocar/OneCallApiMinutely.html#OneCallApiMinutely.raw_data_minutely"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pocar.OneCallApiMinutely.OneCallApiMinutely.raw_data_minutely" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pocar">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pocar" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Tiago Santos.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
