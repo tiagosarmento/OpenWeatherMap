@@ -24,6 +24,8 @@ POCAR - Process One Call Api Response
 
 .. |Release Version| image:: https://img.shields.io/github/v/release/tiagosarmento/pocar
 
+.. |Issues Open| iamge:: https://img.shields.io/github/issues-raw/tiagosarmento/pocar
+
 .. |Tag Version| image:: https://img.shields.io/github/v/tag/tiagosarmento/pocar
 
 .. |Pypi Version| image:: https://img.shields.io/pypi/v/pocar
@@ -37,7 +39,7 @@ POCAR - Process One Call Api Response
 
 |Code Style Black| |made-with-sphinx-doc| |Python Versions| |License: MIT|
 
-|Release Date| |Release Version| |Tag Version|
+|Release Date| |Release Version| |Tag Version| |Issues Open|
 
 |Pypi Version| |Pypi Status| |Pypi License|
 
