@@ -25,6 +25,7 @@ POCAR - Process One Call Api Response
 .. |Release Version| image:: https://img.shields.io/github/v/release/tiagosarmento/pocar
 
 .. |Issues Open| image:: https://img.shields.io/github/issues-raw/tiagosarmento/pocar
+   :target: https://github.com/tiagosarmento/pocar/issues
 
 .. |Tag Version| image:: https://img.shields.io/github/v/tag/tiagosarmento/pocar
 
