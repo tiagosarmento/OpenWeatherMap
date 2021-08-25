@@ -1,3 +1,3 @@
-.. This file 
+.. This file
 
 .. include:: ../../README.rst

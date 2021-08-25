@@ -24,6 +24,7 @@ class OneCallApi:
     """
     Base Class to handle OneCallApi response from OpenWeatherMap
     """
+
     def __init__(self, lat, lon, key, exc=""):
         self.lat = lat
         """
