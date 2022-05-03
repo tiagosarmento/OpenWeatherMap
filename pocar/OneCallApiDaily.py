@@ -28,6 +28,9 @@ logger = logging.getLogger(__name__)
 # Gets 7 values: weather today + for next 7 days
 class OneCallApiDaily(OneCallApi):
     def __init__(self, lat, lon, key):
+        """
+        This is the constructor method
+        """
         super().__init__(lat, lon, key, "current,hourly,minutely,alerts")
 
     def __is_data_available(self, day, field):

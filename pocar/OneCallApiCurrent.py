@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-This module provides a base class to handle One Call Api response from OpenWeatherMap
+This module provides a base class to handle One Call Api response for Current from OpenWeatherMap
 """
 
 import logging
@@ -25,7 +25,24 @@ logger = logging.getLogger(__name__)
 
 # Derived Class to handle Current weather data API response
 class OneCallApiCurrent(OneCallApi):
+    """
+    Base Class to handle OneCallApi response for Alerts from OpenWeatherMap
+    This Class is derived from :class:`~pocar.OneCallAPi.OneCallAPi`
+
+    :param lat: Geographical coordinates of the location (latitude)
+    :type lat: float, range [-90; 90]
+
+    :param lon: Geographical coordinates of the location (longitude)
+    :type lon: float, range [-180; 180]
+
+    :param key: The OpenWeatherMap One Call Api key value
+    :type key: hex, 128-bit hash key
+    """
+
     def __init__(self, lat, lon, key):
+        """
+        This is the constructor method
+        """
         super().__init__(lat, lon, key, "minutely,daily,hourly,alerts")
 
     def __is_data_available(self, field):
@@ -61,98 +78,240 @@ class OneCallApiCurrent(OneCallApi):
         return value
 
     def raw_data_current(self):
+        """
+        | Returns field current of the variable :attr:`~pocar.OneCallAPi.OneCallAPi._raw_data`
+        | This variable contains the One Call Api response for alerts raw data as a dictionary
+
+        :return: raw data as a dictionary
+        :rtype: dict
+        """
         value = dict()
         if "current" in self._rawdata:
             value = self._rawdata["current"]
         return value
 
-    # Get Current time, Unix, UTC
-    # metrics defaults to 0: date in human readable format
-    # any other value, date is represented as UNIX seconds
     def data_time(self, metrics=0):
+        """
+        | Returns the value for dt from One Call Api response
+        | This is the Time when current data was acquired
+        | One Call Api response field is: `current.dt`
+
+        :param metrics: option to select metrics type, 0 = DATE string, UNIX UTC otherwise
+        :type metrics: int, optional
+
+        :return: Current time
+        :rtype: date if metrics is 0 or int otherwise
+        """
         return self.__extract_date_field("dt", metrics)
 
-    # Get Sunrise time, Unix, UTC
     def sunrise(self, metrics=0):
+        """
+        | Returns the value for sunrise from One Call Api response
+        | This is the sunrise time for current
+        | One Call Api response field is: `current.sunrise`
+
+        :param metrics: option to select metrics type, 0 = DATE string, UNIX UTC otherwise
+        :type metrics: int, optional
+
+        :return: Sunrise time
+        :rtype: date if metrics is 0 or int otherwise
+        """
         return self.__extract_date_field("sunrise", metrics)
 
-    # Get Sunset time, Unix, UTC
     def sunset(self, metrics=0):
+        """
+        | Returns the value for sunset from One Call Api response
+        | This is the sunset time for current
+        | One Call Api response field is: `current.sunset`
+
+        :param metrics: option to select metrics type, 0 = DATE string, UNIX UTC otherwise
+        :type metrics: int, optional
+
+        :return: Sunset time
+        :rtype: date if metrics is 0 or int otherwise
+        """
         return self.__extract_date_field("sunset", metrics)
 
-    # Get Current Temperature
     def temperature(self):
+        """
+        | Returns the value for temp from One Call Api response
+        | One Call Api response field is: `current.temp`
+
+        :return: Temperature, C
+        :rtype: float
+        """
         return self.__extract_value_field("temp")
 
-    # Get Current Temperature feel
     def temperature_feels_like(self):
+        """
+        | Returns the value for feels_like from One Call Api response
+        | One Call Api response field is: `current.feels_like`
+
+        :return: Temperature feeling (the human perception of weather), C
+        :rtype: float
+        """
         return self.__extract_value_field("feels_like")
 
-    # Get Current Atmospheric pressure on the sea level, hPa
     def pressure(self):
+        """
+        | Returns the value for pressure from One Call Api response
+        | One Call Api response field is: `current.pressure`
+
+        :return: Atmospheric pressure on the sea level, hPa
+        :rtype: int
+        """
         return self.__extract_value_field("pressure")
 
-    # Get Current Humidity, %
     def humidity(self):
+        """
+        | Returns the value for humidity from One Call Api response
+        | One Call Api response field is: `current.humidity`
+
+        :return: Humidity, %
+        :rtype: int
+        """
         return self.__extract_value_field("humidity")
 
-    # Get Current Atmospheric temperature
     def dew_point(self):
+        """
+        | Returns the value for dew_point from One Call Api response
+        | One Call Api response field is: `current.dew_point`
+        | Atmospheric temperature (varying according to pressure and humidity)
+        | below which water droplets begin to condense and dew can form.
+
+        :return: Temperature, C
+        :rtype: float
+        """
         return self.__extract_value_field("dew_point")
 
-    # Get Current Cloudiness, %
     def clouds(self):
+        """
+        | Returns the value for clouds from One Call Api response
+        | One Call Api response field is: `current.clouds`
+
+        :return: Cloudiness, %
+        :rtype: int
+        """
         return self.__extract_value_field("clouds")
 
-    # Get Current UV index
     def uvi(self):
+        """
+        | Returns the value for uvi from One Call Api response
+        | One Call Api response field is: `current.uvi`
+
+        :return: UV index
+        :rtype: float
+        """
         return self.__extract_value_field("uvi")
 
-    # Get Current Average visibility, metres
     def visibility(self):
+        """
+        | Returns the value for visibility from One Call Api response
+        | One Call Api response field is: `current.visibility`
+
+        :return: Average visibility, metres
+        :rtype: int
+        """
         return self.__extract_value_field("visibility")
 
-    # Get Current Wind speed (m/s)
     def wind_speed(self):
+        """
+        | Returns the value for wind_speed from One Call Api response
+        | One Call Api response field is: `current.wind_speed`
+
+        :return: Wind speed, m/s
+        :rtype: float
+        """
         return self.__extract_value_field("wind_speed")
 
-    # Get Current Wind gust (where available)
     def wind_gust(self):
+        """
+        | Returns the value for wind_gust from One Call Api response
+        | One Call Api response field is: `current.wind_gust`
+        | This value is not available for all locations.
+
+        :return: Wind gust, m/s
+        :rtype: float
+        """
         return self.__extract_value_field("wind_gust")
 
-    # Get Current Wind direction, degrees (meteorological)
     def wind_deg(self):
+        """
+        | Returns the value for wind_deg from One Call Api response
+        | One Call Api response field is: `current.wind_deg`
+
+        :return: Wind direction, degrees
+        :rtype: int
+        """
         return self.__extract_value_field("wind_deg")
 
-    # Get Current Rain volume for last hour, mm (where available)
     def rain_volume(self):
+        """
+        | Returns the value for rain.1h from One Call Api response
+        | One Call Api response field is: `current.rain.1h`
+        | This value is not available for all locations.
+
+        :return: Rain volume for last hour, mm
+        :rtype: int
+        """
         value = "N/A"
         if self.__is_data_available("rain") is True:
             if "1h" in self._rawdata["current"]["rain"]:
                 value = self._rawdata["current"]["rain"]["1h"]
         return value
 
-    # Get Current Snow volume for last hour, mm (where available)
     def snow_volume(self):
+        """
+        | Returns the value for snow.1h from One Call Api response
+        | One Call Api response field is: `current.snow.1h`
+        | This value is not available for all locations.
+
+        :return: Snow volume for last hour, mm
+        :rtype: int
+        """
         value = "N/A"
         if self.__is_data_available("snow") is True:
             if "1h" in self._rawdata["current"]["snow"]:
                 value = self._rawdata["current"]["snow"]["1h"]
         return value
 
-    # Get Current Weather condition id
     def weather_condition_id(self):
+        """
+        | Returns the value for weather.id from One Call Api response
+        | One Call Api response field is: `current.weather.id`
+
+        :return: Weather condition id
+        :rtype: int
+        """
         return self.__extract_weather_field("id")
 
-    # Get Group of weather parameters (Rain, Snow, Extreme etc.)
     def weather_condition_main(self):
+        """
+        | Returns the value for weather.main from One Call Api response
+        | One Call Api response field is: `current.weather.main`
+
+        :return: Group of weather parameters (Rain, Snow, Extreme etc.)
+        :rtype: str
+        """
         return self.__extract_weather_field("main")
 
-    # Get Weather condition within the group (full list of weather conditions)
     def weather_condition_description(self):
+        """
+        | Returns the value for weather.description from One Call Api response
+        | One Call Api response field is: `current.weather.description`
+
+        :return: Weather condition within the group
+        :rtype: str
+        """
         return self.__extract_weather_field("description")
 
-    # Get Weather icon id. How to get icons
-    #  http://openweathermap.org/img/wn/<icon_id>@2x.png
     def weather_condition_icon(self):
+        """
+        | Returns the value for weather.icon from One Call Api response
+        | One Call Api response field is: `current.weather.icon`
+        | The icon can be retrieve from: http://openweathermap.org/img/wn/<icon_id>@2x.png
+
+        :return: Weather icon id
+        :rtype: str
+        """
         return self.__extract_weather_field("icon")

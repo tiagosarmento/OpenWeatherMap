@@ -27,6 +27,9 @@ logger = logging.getLogger(__name__)
 # Values are for current hour + 47
 class OneCallApiHourly(OneCallApi):
     def __init__(self, lat, lon, key):
+        """
+        This is the constructor method
+        """
         super().__init__(lat, lon, key, "current,daily,minutely,alerts")
 
     def __is_data_available(self, hour, field):

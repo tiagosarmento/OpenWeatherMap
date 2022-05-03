@@ -28,6 +28,9 @@ logger = logging.getLogger(__name__)
 # Gets 61 values: current + next 60 minutes
 class OneCallApiMinutely(OneCallApi):
     def __init__(self, lat, lon, key):
+        """
+        This is the constructor method
+        """
         super().__init__(lat, lon, key, "current,daily,hourly,alerts")
 
     def __is_data_available(self, minute, field):

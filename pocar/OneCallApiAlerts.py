@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-This module provides a base class to handle One Call Api response from OpenWeatherMap
+This module provides a class to handle One Call Api response for Alerts from OpenWeatherMap
 """
 
 import logging
@@ -25,7 +25,24 @@ logger = logging.getLogger(__name__)
 
 # Derived Class to handle alerts data API response
 class OneCallApiAlerts(OneCallApi):
+    """
+    Base Class to handle OneCallApi response for Alerts from OpenWeatherMap
+    This Class is derived from :class:`~pocar.OneCallAPi.OneCallAPi`
+
+    :param lat: Geographical coordinates of the location (latitude)
+    :type lat: float, range [-90; 90]
+
+    :param lon: Geographical coordinates of the location (longitude)
+    :type lon: float, range [-180; 180]
+
+    :param key: The OpenWeatherMap One Call Api key value
+    :type key: hex, 128-bit hash key
+    """
+
     def __init__(self, lat, lon, key):
+        """
+        This is the constructor method
+        """
         super().__init__(lat, lon, key, "current,hourly,minutely,daily")
 
     def __is_data_available(self, field):
@@ -53,25 +70,82 @@ class OneCallApiAlerts(OneCallApi):
         return value
 
     def raw_data_alerts(self):
+        """
+        | Returns field alerts of the variable :attr:`~pocar.OneCallAPi.OneCallAPi._raw_data`
+        | This variable contains the One Call Api response for alerts raw data as a dictionary
+
+        :return: raw data as a dictionary
+        :rtype: dict
+        """
         value = dict()
         if "alerts" in self._rawdata:
             value = self._rawdata["alerts"]
         return value
 
     def sender_name(self):
+        """
+        | Returns the value for sender_name from One Call Api response
+        | One Call Api response field is: `alerts.sender_name`
+
+        :return: Name of the alert source
+        :rtype: str
+        """
         return self.__extract_value_field("sender_name")
 
     def event(self):
+        """
+        | Returns the value for event from One Call Api response
+        | One Call Api response field is: `alerts.event`
+
+        :return: Alert event name
+        :rtype: str
+        """
         return self.__extract_value_field("event")
 
     def start_dt(self, metrics=0):
+        """
+        | Returns the value for start date from One Call Api response
+        | This is the Date and time of the start of the alert
+        | One Call Api response field is: `alerts.start`
+
+        :param metrics: option to select metrics type, 0 = DATE string, UNIX UTC otherwise
+        :type metrics: int, optional
+
+        :return: Date and time of the end of the alert
+        :rtype: date if metrics is 0 or int otherwise
+        """
         return self.__extract_date_field("start", metrics)
 
     def end_dt(self, metrics=0):
+        """
+        | Returns the value for end date from One Call Api response
+        | This is the Date and time of the end of the alert
+        | One Call Api response field is: `alerts.end`
+
+        :param metrics: option to select metrics type, 0 = DATE string, UNIX UTC otherwise
+        :type metrics: int, optional
+
+        :return: Date and time of the end of the alert
+        :rtype: date if metrics is 0 or int otherwise
+        """
         return self.__extract_date_field("end", metrics)
 
     def description(self):
+        """
+        | Returns the value for description from One Call Api response
+        | One Call Api response field is: `alerts.description`
+
+        :return: Description of the alert
+        :rtype: str
+        """
         return self.__extract_value_field("description")
 
     def tags(self):
+        """
+        | Returns the value for tags from One Call Api response
+        | One Call Api response field is: `alerts.tags`
+
+        :return: Type of severe weather
+        :rtype: str
+        """
         return self.__extract_value_field("tags")
