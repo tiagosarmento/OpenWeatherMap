@@ -1,6 +1,0 @@
-#
-# This file holds the required dependencies
-#
-DateTime
-pre-commit
-requests
