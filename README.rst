@@ -2,13 +2,13 @@ POCAR - Process One Call Api Response
 =====================================
 
 .. |Code QL Analysis| image:: https://github.com/tiagosarmento/pocar/actions/workflows/codeql-analysis.yml/badge.svg
-   :target: https://github.com/tiagosarmento/pocar/actions/workflows/codeql-analysis.yml
+   :target: https://github.com/tiagosarmento/pocar/actions/workflows/continuous_integration.yml
 
 .. |FLake8 Lint Analysis| image:: https://github.com/tiagosarmento/pocar/actions/workflows/flake8-analysis.yml/badge.svg
-   :target: https://github.com/tiagosarmento/pocar/actions/workflows/flake8-analysis.yml
+   :target: https://github.com/tiagosarmento/pocar/actions/workflows/continuous_integration.yml
 
 .. |Pytest Analysis| image:: https://github.com/tiagosarmento/pocar/actions/workflows/pytest-analysis.yml/badge.svg
-   :target: https://github.com/tiagosarmento/pocar/actions/workflows/pytest-analysis.yml
+   :target: https://github.com/tiagosarmento/pocar/actions/workflows/continuous_integration.yml
 
 .. |Code Style Black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
    :target: https://black.readthedocs.io/en/stable/

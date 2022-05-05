@@ -50,7 +50,6 @@ jobs:
       fail-fast: false
       matrix:
         language: [ 'python' ]
-        python-version: [3.9]
 
     steps:
     - uses: actions/checkout@v2
@@ -59,7 +58,6 @@ jobs:
       uses: github/codeql-action/init@v1
       with:
         languages: ${{ matrix.language }}
-        python-version: ${{ matrix.python-version }}
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
