@@ -70,4 +70,10 @@ jobs:
 
       # Run python unit tests
       - name: Run python unit tests
-        run: poetry run pytest -v --cov --cov-branch
+        run: poetry run pytest -v --cov --cov-branch --junitxml=pytest.xml --cov-report=term-missing:skip-covered | tee pytest-coverage.txt
+
+      - name: Pytest coverage report
+        uses: MishaKav/pytest-coverage-comment@main
+        with:
+          pytest-coverage-path: ./pytest-coverage.txt
+          junitxml-path: ./pytest.xml
