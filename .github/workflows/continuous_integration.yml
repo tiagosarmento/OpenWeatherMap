@@ -41,7 +41,7 @@ jobs:
       # Run pre-commit actions, which verify the python PEP compliance
       - name: Execute pre-commit actions
         run: poetry run pre-commit run --all-files
-        
+
   py-unit-tests:
     needs: [python_pep_compliance]
     runs-on: ubuntu-latest
