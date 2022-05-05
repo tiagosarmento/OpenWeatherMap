@@ -1,36 +1,44 @@
-# This is a basic workflow to help you get started with Actions
-
+# The CI workflow
 name: CI
 
-# Controls when the workflow will run
+# Define when CI workflow is run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
-  # Allows you to run this workflow manually from the Actions tab
+#  schedule:
+#    - cron: '25 17 * * 6'
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# Define the CI jobs
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  python_pep_compliance:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    strategy:
+      matrix:
+        python-version: [3.9]
     steps:
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      # Setup python version
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      # Install dependencies
+      - name: Install dependencies
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          python -m pip install --upgrade pip
+          pip install poetry
+
+      # Enable Poetry virtual environment
+      - name: Enable virtual environment
+        run: poetry install
+
+      # Run pre-commit actions, which verify the python PEP compliance
+      - name: Execute pre-commit actions
+        run: poetry run pre-commit run --all-files
