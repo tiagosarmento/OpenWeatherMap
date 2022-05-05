@@ -64,7 +64,7 @@ jobs:
 
   py-unit-tests:
     name: Python Unit Tests
-    needs: [python_pep_compliance, code-ql-analysis]
+    needs: [python_pep_compliance code-ql-analysis]
     runs-on: ubuntu-latest
     strategy:
       matrix:
