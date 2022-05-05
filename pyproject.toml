@@ -8,7 +8,7 @@ maintainers   = ["Tiago Santos <tiagosarmentosantos@gmail.com>"]
 readme        = "README.rst"
 homepage      = "https://github.com/tiagosarmento/pocar"
 repository    = "https://github.com/tiagosarmento/pocar"
-documentation = "https://github.com/tiagosarmento/pocar"
+documentation = "https://tiagosarmento.github.io/pocar/"
 keywords      = [
                 "openweather",
                 "onecallapi",
