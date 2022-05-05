@@ -1,17 +1,8 @@
 POCAR - Process One Call Api Response
 =====================================
 
-.. |Code QL Analysis| image:: https://github.com/tiagosarmento/pocar/actions/workflows/codeql-analysis.yml/badge.svg
+.. |Continuous Integration| image:: https://github.com/tiagosarmento/pocar/actions/workflows/continuous_integration.yml/badge.svg?branch=main
    :target: https://github.com/tiagosarmento/pocar/actions/workflows/continuous_integration.yml
-
-.. |FLake8 Lint Analysis| image:: https://github.com/tiagosarmento/pocar/actions/workflows/flake8-analysis.yml/badge.svg
-   :target: https://github.com/tiagosarmento/pocar/actions/workflows/continuous_integration.yml
-
-.. |Pytest Analysis| image:: https://github.com/tiagosarmento/pocar/actions/workflows/pytest-analysis.yml/badge.svg
-   :target: https://github.com/tiagosarmento/pocar/actions/workflows/continuous_integration.yml
-
-.. |Code Style Black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
-   :target: https://black.readthedocs.io/en/stable/
 
 .. |made-with-sphinx-doc| image:: https://img.shields.io/badge/Made%20with-Sphinx-1f425f.svg
    :target: https://www.sphinx-doc.org/
@@ -38,9 +29,9 @@ POCAR - Process One Call Api Response
 .. |Pypi License| image:: https://img.shields.io/pypi/l/pocar
 
 
-|Code QL Analysis| |FLake8 Lint Analysis| |Pytest Analysis|
+|Continuous Integration|
 
-|Code Style Black| |made-with-sphinx-doc| |Python Versions| |License: MIT|
+|made-with-sphinx-doc| |Python Versions| |License: MIT|
 
 |Release Date| |Release Version| |Tag Version| |Issues Open|
 
