@@ -16,7 +16,7 @@ def func_minutely()
     ocam = OneCallApiMinutely(LAT, LON, KEY)
 
     # 2. Update Open Weather data for One Call Api
-    ocam.updateData()
+    ocam.update_data()
 
     # 3. Work on processed data
     print("One Call Api configuration: \n", ocam.config() )

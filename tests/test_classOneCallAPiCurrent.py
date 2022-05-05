@@ -1,3 +1,4 @@
+"""Test Module: OneCallApiCurrent."""
 from pocar.OneCallApiCurrent import OneCallApiCurrent
 
 # CONSTANT DATA
@@ -31,8 +32,8 @@ RAW_DATA_CURRENT = {
 }
 
 
-# Test: validate constructor nominal case
 def test_0000():
+    """Test: validate constructor nominal case."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     assert ocac.lat == LAT
     assert ocac.lon == LON
@@ -40,148 +41,148 @@ def test_0000():
     assert ocac.exc == EXC
 
 
-# Test: validate method data time
 def test_0001():
+    """Test: validate method data time."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.data_time(1) == RAW_DATA_CURRENT["current"]["dt"]
 
 
-# Test: validate method Sunrise time
 def test_0002():
+    """Test: validate method Sunrise time."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.sunrise(1) == RAW_DATA_CURRENT["current"]["sunrise"]
 
 
-# Test: validate method Sunset time
 def test_0003():
+    """Test: validate method Sunset time."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.sunset(1) == RAW_DATA_CURRENT["current"]["sunset"]
 
 
-# Test: validate method temperature
 def test_0004():
+    """Test: validate method temperature."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.temperature() == RAW_DATA_CURRENT["current"]["temp"]
 
 
-# Test: validate method temperature_feels_like
 def test_0005():
+    """Test: validate method temperature_feels_like."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.temperature_feels_like() == RAW_DATA_CURRENT["current"]["feels_like"]
 
 
-# Test: validate method pressure
 def test_0006():
+    """Test: validate method pressure."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.pressure() == RAW_DATA_CURRENT["current"]["pressure"]
 
 
-# Test: validate method humidity
 def test_0007():
+    """Test: validate method humidity."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.humidity() == RAW_DATA_CURRENT["current"]["humidity"]
 
 
-# Test: validate method dew_point
 def test_0008():
+    """Test: validate method dew_point."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.dew_point() == RAW_DATA_CURRENT["current"]["dew_point"]
 
 
-# Test: validate method clouds
 def test_0009():
+    """Test: validate method clouds."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.clouds() == RAW_DATA_CURRENT["current"]["clouds"]
 
 
-# Test: validate method uvi
 def test_0010():
+    """Test: validate method uvi."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.uvi() == RAW_DATA_CURRENT["current"]["uvi"]
 
 
-# Test: validate method visibility
 def test_0011():
+    """Test: validate method visibility."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.visibility() == RAW_DATA_CURRENT["current"]["visibility"]
 
 
-# Test: validate method wind_speed
 def test_0012():
+    """Test: validate method wind_speed."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.wind_speed() == RAW_DATA_CURRENT["current"]["wind_speed"]
 
 
-# Test: validate method wind_gust
 def test_0013():
+    """Test: validate method wind_gust."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.wind_gust() == "N/A"
 
 
-# Test: validate method wind_deg
 def test_0014():
+    """Test: validate method wind_deg."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.wind_deg() == RAW_DATA_CURRENT["current"]["wind_deg"]
 
 
-# Test: validate method rain_volume
 def test_0015():
+    """Test: validate method rain_volume."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.rain_volume() == "N/A"
 
 
-# Test: validate method snow_volume
 def test_0016():
+    """Test: validate method snow_volume."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.snow_volume() == "N/A"
 
 
-# Test: validate method weather_condition_id
 def test_0017():
+    """Test: validate method weather_condition_id."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.weather_condition_id() == RAW_DATA_CURRENT["current"]["weather"][0]["id"]
 
 
-# Test: validate method weather_condition_main
 def test_0018():
+    """Test: validate method weather_condition_main."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.weather_condition_main() == RAW_DATA_CURRENT["current"]["weather"][0]["main"]
 
 
-# Test: validate method weather_condition_description
 def test_0019():
+    """Test: validate method weather_condition_description."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.weather_condition_description() == RAW_DATA_CURRENT["current"]["weather"][0]["description"]
 
 
-# Test: validate method weather_condition_icon
 def test_0020():
+    """Test: validate method weather_condition_icon."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.weather_condition_icon() == RAW_DATA_CURRENT["current"]["weather"][0]["icon"]
 
 
-# Test: validate method raw data current
 def test_0021():
+    """Test: validate method raw data current."""
     ocac = OneCallApiCurrent(LAT, LON, KEY)
     ocac._rawdata = RAW_DATA_CURRENT
     assert ocac.raw_data_current() == RAW_DATA_CURRENT["current"]

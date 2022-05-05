@@ -16,7 +16,7 @@ def func_hourly()
     ocah = OneCallApiHourly(LAT, LON, KEY)
 
     # 2. Update Open Weather data for One Call Api
-    ocah.updateData()
+    ocah.update_data()
 
     # 3. Work on processed data
     print("One Call Api configuration: \n", ocah.config() )

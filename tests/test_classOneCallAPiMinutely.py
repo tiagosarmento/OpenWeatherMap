@@ -1,5 +1,7 @@
-from pocar.OneCallApiMinutely import OneCallApiMinutely
+"""Test Module: OneCallApiMinutely."""
 import pytest
+
+from pocar.OneCallApiMinutely import OneCallApiMinutely
 
 # CONSTANT DATA
 LAT = 45.1234
@@ -79,8 +81,8 @@ RAW_DATA_MINUTELY = {
 }
 
 
-# Test: validate constructor nominal case
 def test_0000():
+    """Test: validate constructor nominal case."""
     ocam = OneCallApiMinutely(LAT, LON, KEY)
     assert ocam.lat == LAT
     assert ocam.lon == LON
@@ -88,15 +90,15 @@ def test_0000():
     assert ocam.exc == EXC
 
 
-# Test: validate method raw data minutely
 def test_0001():
+    """Test: validate method raw data minutely."""
     ocam = OneCallApiMinutely(LAT, LON, KEY)
     ocam._rawdata = RAW_DATA_MINUTELY
     assert ocam.raw_data_minutely() == RAW_DATA_MINUTELY["minutely"]
 
 
-# Test: validate method precipitation
 def test_0002():
+    """Test: validate method precipitation."""
     ocam = OneCallApiMinutely(LAT, LON, KEY)
     ocam._rawdata = RAW_DATA_MINUTELY
     # case greater than
@@ -114,8 +116,8 @@ def test_0002():
         assert RAW_DATA_MINUTELY["minutely"][idx]["precipitation"] == values[idx]
 
 
-# Test: validate method precipitation
 def test_0003():
+    """Test: validate method precipitation."""
     ocam = OneCallApiMinutely(LAT, LON, KEY)
     ocam._rawdata = RAW_DATA_MINUTELY
     # case greater than

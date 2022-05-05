@@ -16,7 +16,7 @@ def func_alerts()
     ocaa = OneCallApiAlerts(LAT, LON, KEY)
 
     # 2. Update Open Weather data for One Call Api
-    ocaa.updateData()
+    ocaa.update_data()
 
     # 3. Work on processed data
     print("One Call Api configuration: \n", ocaa.config() )

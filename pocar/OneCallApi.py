@@ -1,13 +1,9 @@
-#!/usr/bin/env python3
-
-"""
-This module provides a base class to handle One Call Api response from OpenWeatherMap
-"""
-
+"""This module provides a base class to handle One Call Api response from OpenWeatherMap."""
 import json
 import logging
-import requests
 import time
+
+import requests
 
 # Uncomment this line to suppress warning message due to:
 #    InsecureRequestWarning: Unverified HTTPS request is being made.
@@ -22,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 class OneCallApi:
     """
-    Base Class to handle OneCallApi response from OpenWeatherMap
+    Base Class to handle OneCallApi response from OpenWeatherMap.
 
     :param lat: Geographical coordinates of the location (latitude)
     :type lat: float, range [-90; 90]
@@ -44,14 +40,12 @@ class OneCallApi:
     """
 
     def __init__(self, lat, lon, key, exc=""):
-        """
-        This is the constructor method
-        """
+        """This is the constructor method."""
         self.lat = lat
         self.lon = lon
         self.key = key
         self.exc = exc
-        self._rawdata = dict()
+        self._rawdata = {}
         self._timestamp = 0
         self.__url = (
             f"https://api.openweathermap.org/data/2.5/onecall?lat={self._lat}&lon={self._lon}"
@@ -60,7 +54,7 @@ class OneCallApi:
 
     @property
     def lat(self):
-        """The getter/setter for attribute :attr:`lat`"""
+        """The getter/setter for attribute :attr:`lat`."""
         logger.debug("Get method for 'lat' attribute")
         return self._lat
 
@@ -69,13 +63,12 @@ class OneCallApi:
         logger.debug("Set method for 'lat' attribute")
         if lat < -90.0 or lat > 90.0:
             raise ValueError("The 'lat' argument must be within range [-90, 90]")
-        else:
-            self._lat = lat
-            logger.debug("Set 'lat' value to: %s", self._lat)
+        self._lat = lat
+        logger.debug("Set 'lat' value to: %s", self._lat)
 
     @property
     def lon(self):
-        """The getter/setter for attribute :attr:`lon`"""
+        """The getter/setter for attribute :attr:`lon`."""
         logger.debug("Get method for 'lon' attribute")
         return self._lon
 
@@ -84,13 +77,12 @@ class OneCallApi:
         logger.debug("Set method for 'lon' attribute")
         if lon < -180.0 or lon > 180.0:
             raise ValueError("The 'lon' argument must be within range [-180, 180]")
-        else:
-            self._lon = lon
-            logger.debug("Set 'lon' value to: %s", self._lon)
+        self._lon = lon
+        logger.debug("Set 'lon' value to: %s", self._lon)
 
     @property
     def key(self):
-        """The getter/setter for attribute :attr:`key`"""
+        """The getter/setter for attribute :attr:`key`."""
         logger.debug("Get method for 'key' attribute")
         return self._key
 
@@ -106,13 +98,12 @@ class OneCallApi:
 
         if len(key) != 32:
             raise ValueError("The 'key' argument must have a size of 32")
-        else:
-            self._key = key
-            logger.debug("Set 'key' value to: %s", self._key)
+        self._key = key
+        logger.debug("Set 'key' value to: %s", self._key)
 
     @property
     def exc(self):
-        """The getter/setter for attribute :attr:`exc`"""
+        """The getter/setter for attribute :attr:`exc`."""
         logger.debug("Get method for 'exc' attribute")
         return self._exc
 
@@ -129,22 +120,29 @@ class OneCallApi:
             raise ValueError("The 'exc' argument must be a comma-delimited string (without spaces)")
         else:
             # the exclusion shall contain specific words
-            specWordList = ["current", "minutely", "hourly", "daily", "alerts"]
-            excWordList = exc.split(",")
-            for excWord in excWordList:
-                if excWord in specWordList:
-                    logger.debug("The 'exc' argument contains word: %s", excWord)
+            spec_word_list = ["current", "minutely", "hourly", "daily", "alerts"]
+            exc_word_list = exc.split(",")
+            for exc_word in exc_word_list:
+                if exc_word in spec_word_list:
+                    logger.debug("The 'exc' argument contains word: %s", exc_word)
                 else:
-                    logger.error("The 'exc' argument contains an invalid word: %s", excWord)
-                    raise ValueError("The 'exc' argument must specific words: (current, minutely, hourly, daily, alerts)")
+                    logger.error("The 'exc' argument contains an invalid word: %s", exc_word)
+                    raise ValueError(
+                        "The 'exc' argument must specific words: (current, minutely, hourly, daily, alerts)"
+                    )
             self._exc = exc
         logger.debug("Set 'exc' value to: %s", self._exc)
 
     def config(self):
         """
-        | Returns a dictionary containg the configuration used to call OpenWeatherMap for One Call Api
+        | The config method.
+
+        | Returns a dictionary containg the configuration used to call OpenWeatherMap for One Call Api.
         | The dictionary is in form of (key, value), as follows:
-        | [ ( lat , :attr:`~pocar.OneCallAPi.OneCallAPi.lat` ), ( lon , :attr:`~pocar.OneCallAPi.OneCallAPi.lon` ), ( key , :attr:`~pocar.OneCallAPi.OneCallAPi.key` ), ( url , :attr:`~pocar.OneCallAPi.OneCallAPi.__url` )]
+        | [ ( lat , :attr:`~pocar.OneCallAPi.OneCallAPi.lat` ),
+        |   ( lon , :attr:`~pocar.OneCallAPi.OneCallAPi.lon` ),
+        |   ( key , :attr:`~pocar.OneCallAPi.OneCallAPi.key` ),
+        |   ( url , :attr:`~pocar.OneCallAPi.OneCallAPi.__url` )]
 
         :return: Configuration to call OpenWeatherMap for One Call Api
         :rtype: dict
@@ -168,7 +166,9 @@ class OneCallApi:
 
     def raw_data(self):
         """
-        | Returns the variable :attr:`~pocar.OneCallAPi.OneCallAPi._raw_data`
+        | The raw_data method.
+
+        | Returns the variable :attr:`~pocar.OneCallAPi.OneCallAPi._raw_data`.
         | This variable contains the One Call Api response raw data as a dictionary
 
         :return: raw data as a dictionary
@@ -176,8 +176,10 @@ class OneCallApi:
         """
         return self._rawdata
 
-    def __getData(self):
+    def __get_data(self):
         """
+        | The __get_data method.
+
         | This method makes an HTTP request to OpenWeatherMap.
         | The URL for the call is :attr:`~pocar.OneCallAPi.OneCallAPi.__url`
         | The retrieved data is stored in :attr:`~pocar.OneCallAPi.OneCallAPi._rawdata`
@@ -212,18 +214,22 @@ class OneCallApi:
             is_data_updated = True
         return is_data_updated
 
-    def updateData(self):
+    def update_data(self):
         """
-        This method triggers a call to :meth:`~pocar.OneCallAPi.OneCallAPi.__getData`
+        | The update_data method.
+
+        This method triggers a call to :meth:`~pocar.OneCallAPi.OneCallAPi.__get_data`.
 
         :return: `True` if data successfully update, `False` otherwise
         :rtype: bool
         """
-        return self.__getData()
+        return self.__get_data()
 
     def timezone(self):
         """
-        | Returns the value for timezone from One Call Api response
+        | The timezone method.
+
+        | Returns the value for timezone from One Call Api response.
         | One Call Api response field is: `["timezone"]`
 
         :return: Timezone name for the requested location
@@ -236,7 +242,9 @@ class OneCallApi:
 
     def timezone_offset(self):
         """
-        | Returns the value for timezone offset from One Call Api response
+        | The timezone_offset method.
+
+        | Returns the value for timezone offset from One Call Api response.
         | One Call Api response field is: `["timezone_offset"]`
 
         :return: Shift in seconds from UTC
@@ -249,7 +257,11 @@ class OneCallApi:
 
     def timestamp(self):
         """
-        Returns the value of :attr:`~pocar.OneCallAPi.OneCallAPi._timestamp`, that holds the timestamp of when One Call Api call response was received
+        | The timestamp method.
+
+        | Returns the value of :attr:`~pocar.OneCallAPi.OneCallAPi._timestamp`,
+        | that holds the timestamp of when One Call Api call response was received.
+
 
         :return: unix seconds value
         :rtype: float

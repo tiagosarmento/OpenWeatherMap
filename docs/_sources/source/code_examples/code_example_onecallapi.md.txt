@@ -17,7 +17,7 @@ def func_base()
     oca = OneCallApi(LAT, LON, KEY, EXC)
 
     # 2. Update Open Weather data for One Call Api
-    oca.updateData()
+    oca.update_data()
 
     # 3. Work on processed data
     print("One Call Api configuration: \n", oca.config() )

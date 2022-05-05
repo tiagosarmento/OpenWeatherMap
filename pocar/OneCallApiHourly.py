@@ -1,13 +1,8 @@
-#!/usr/bin/env python3
-
-"""
-This module provides a base class to handle One Call Api response from OpenWeatherMap
-"""
-
+"""This module provides a base class to handle One Call Api response from OpenWeatherMap."""
 import logging
-import requests
-
 from datetime import datetime
+
+import requests
 
 from pocar.OneCallApi import OneCallApi
 
@@ -26,19 +21,21 @@ logger = logging.getLogger(__name__)
 # Hourly holds the weather forecast for the next 48 hours in a hourly basis
 # Values are for current hour + 47
 class OneCallApiHourly(OneCallApi):
+    """TBD."""
+
     def __init__(self, lat, lon, key):
-        """
-        This is the constructor method
-        """
+        """This is the constructor method."""
         super().__init__(lat, lon, key, "current,daily,minutely,alerts")
 
     def __is_data_available(self, hour, field):
+        """TBD."""
         value = False
         if ("hourly" in self._rawdata) and (field in self._rawdata["hourly"][hour]):
             value = True
         return value
 
     def __extract_date_field(self, hour, field, metrics=0):
+        """TBD."""
         value = "N/A"
         if self.__is_data_available(hour, field) is True:
             if metrics == 0:
@@ -50,6 +47,7 @@ class OneCallApiHourly(OneCallApi):
         return value
 
     def __extract_value_field(self, hour, field):
+        """TBD."""
         value = "N/A"
         if self.__is_data_available(hour, field) is True:
             value = self._rawdata["hourly"][hour][field]
@@ -57,9 +55,10 @@ class OneCallApiHourly(OneCallApi):
         return value
 
     def __extract_value_set(self, hour, field, all_values):
+        """TBD."""
         if hour < 0 or hour > 48:
             raise ValueError("The 'hour' argument must be within range [0, 48]")
-        elif all_values is True:
+        if all_values is True:
             value = [0] * 48  # Initialize the 48 data time values
             for idx in range(48):
                 value[idx] = self.__extract_value_field(idx, field)
@@ -68,6 +67,7 @@ class OneCallApiHourly(OneCallApi):
         return value
 
     def __extract_weather_field(self, hour, field):
+        """TBD."""
         value = "N/A"
         if ("hourly" in self._rawdata) and ("weather" in self._rawdata["hourly"][hour]):
             if field in self._rawdata["hourly"][hour]["weather"][0]:
@@ -76,9 +76,10 @@ class OneCallApiHourly(OneCallApi):
         return value
 
     def __extract_weather_set(self, hour, field, all_values):
+        """TBD."""
         if hour < 0 or hour > 48:
             raise ValueError("The 'hour' argument must be within range [0, 48]")
-        elif all_values is True:
+        if all_values is True:
             value = [0] * 48  # Initialize the 48 data time values
             for idx in range(48):
                 value[idx] = self.__extract_weather_field(idx, field)
@@ -87,15 +88,17 @@ class OneCallApiHourly(OneCallApi):
         return value
 
     def raw_data_hourly(self):
-        value = dict()
+        """TBD."""
+        value = {}
         if "hourly" in self._rawdata:
             value = self._rawdata["hourly"]
         return value
 
     def data_time(self, hour=0, metrics=0, all_values=False):
+        """TBD."""
         if hour < 0 or hour > 48:
             raise ValueError("The 'hour' argument must be within range [0, 48]")
-        elif all_values is True:
+        if all_values is True:
             value = [0] * 48  # Initialize the 48 data time values
             for idx in range(48):
                 value[idx] = self.__extract_date_field(idx, "dt", metrics)
@@ -104,49 +107,65 @@ class OneCallApiHourly(OneCallApi):
         return value
 
     def temp(self, hour=0, all_values=False):
+        """TBD."""
         return self.__extract_value_set(hour, "temp", all_values)
 
     def feels_like(self, hour=0, all_values=False):
+        """TBD."""
         return self.__extract_value_set(hour, "feels_like", all_values)
 
     def pressure(self, hour=0, all_values=False):
+        """TBD."""
         return self.__extract_value_set(hour, "pressure", all_values)
 
     def humidity(self, hour=0, all_values=False):
+        """TBD."""
         return self.__extract_value_set(hour, "humidity", all_values)
 
     def dew_point(self, hour=0, all_values=False):
+        """TBD."""
         return self.__extract_value_set(hour, "dew_point", all_values)
 
     def uvi(self, hour=0, all_values=False):
+        """TBD."""
         return self.__extract_value_set(hour, "uvi", all_values)
 
     def clouds(self, hour=0, all_values=False):
+        """TBD."""
         return self.__extract_value_set(hour, "clouds", all_values)
 
     def visibility(self, hour=0, all_values=False):
+        """TBD."""
         return self.__extract_value_set(hour, "visibility", all_values)
 
     def wind_speed(self, hour=0, all_values=False):
+        """TBD."""
         return self.__extract_value_set(hour, "wind_speed", all_values)
 
     def wind_deg(self, hour=0, all_values=False):
+        """TBD."""
         return self.__extract_value_set(hour, "wind_deg", all_values)
 
     def wind_gust(self, hour=0, all_values=False):
+        """TBD."""
         return self.__extract_value_set(hour, "wind_gust", all_values)
 
     def weather_id(self, hour=0, all_values=False):
+        """TBD."""
         return self.__extract_weather_set(hour, "id", all_values)
 
     def weather_main(self, hour=0, all_values=False):
+        """TBD."""
         return self.__extract_weather_set(hour, "main", all_values)
 
     def weather_description(self, hour=0, all_values=False):
+        """TBD."""
         return self.__extract_weather_set(hour, "description", all_values)
 
     def weather_icon(self, hour=0, all_values=False):
+        """TBD."""
         return self.__extract_weather_set(hour, "icon", all_values)
 
     def pop(self, hour=0, all_values=False):
+        """TBD."""
         return self.__extract_value_set(hour, "pop", all_values)

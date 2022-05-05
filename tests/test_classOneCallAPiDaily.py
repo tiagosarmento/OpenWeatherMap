@@ -1,5 +1,7 @@
-from pocar.OneCallApiDaily import OneCallApiDaily
+"""Test Module: OneCallApiDaily."""
 import pytest
+
+from pocar.OneCallApiDaily import OneCallApiDaily
 
 # CONSTANT DATA
 LAT = 45.1234
@@ -181,6 +183,7 @@ RAW_DATA_DAILY = {
 
 
 def validate_date_func(func, field):
+    """Support function to validate date."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     # case greater than
@@ -199,6 +202,7 @@ def validate_date_func(func, field):
 
 
 def validate_value_func(func, field):
+    """Support function to validate value."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     # case greater than
@@ -217,6 +221,7 @@ def validate_value_func(func, field):
 
 
 def validate_temp_func(func, group, field):
+    """Support function to validate temperature."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     # case greater than
@@ -235,6 +240,7 @@ def validate_temp_func(func, group, field):
 
 
 def validate_weather_func(func, field):
+    """Support function to validate weather."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     # case greater than
@@ -252,8 +258,8 @@ def validate_weather_func(func, field):
         assert RAW_DATA_DAILY["daily"][idx]["weather"][0][field] == values[idx]
 
 
-# Test: validate constructor nominal case
 def test_0000():
+    """Test: validate constructor nominal case."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     assert ocad.lat == LAT
     assert ocad.lon == LON
@@ -261,204 +267,204 @@ def test_0000():
     assert ocad.exc == EXC
 
 
-# Test: validate method raw_data_daily
 def test_0001():
+    """Test: validate method raw_data_daily."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     assert ocad.raw_data_daily() == RAW_DATA_DAILY["daily"]
 
 
-# Test: validate method data_time
 def test_0002():
+    """Test: validate method data_time."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_date_func(ocad.data_time, "dt")
 
 
-# Test: validate method sunrise
 def test_0003():
+    """Test: validate method sunrise."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_date_func(ocad.sunrise, "sunrise")
 
 
-# Test: validate method sunset
 def test_0004():
+    """Test: validate method sunset."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_date_func(ocad.sunset, "sunset")
 
 
-# Test: validate method moonrise
 def test_0005():
+    """Test: validate method moonrise."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_date_func(ocad.moonrise, "moonrise")
 
 
-# Test: validate method moonset
 def test_0006():
+    """Test: validate method moonset."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_date_func(ocad.moonset, "moonset")
 
 
-# Test: validate method pressure
 def test_0007():
+    """Test: validate method pressure."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_value_func(ocad.pressure, "pressure")
 
 
-# Test: validate method humidity
 def test_0008():
+    """Test: validate method humidity."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_value_func(ocad.humidity, "humidity")
 
 
-# Test: validate method dew_point
 def test_0009():
+    """Test: validate method dew_point."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_value_func(ocad.dew_point, "dew_point")
 
 
-# Test: validate method wind_speed
 def test_0010():
+    """Test: validate method wind_speed."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_value_func(ocad.wind_speed, "wind_speed")
 
 
-# Test: validate method wind_deg
 def test_0011():
+    """Test: validate method wind_deg."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_value_func(ocad.wind_deg, "wind_deg")
 
 
-# Test: validate method wind_gust
 def test_0012():
+    """Test: validate method wind_gust."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_value_func(ocad.wind_gust, "wind_gust")
 
 
-# Test: validate method clouds
 def test_0013():
+    """Test: validate method clouds."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_value_func(ocad.clouds, "clouds")
 
 
-# Test: validate method pop
 def test_0014():
+    """Test: validate method pop."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_value_func(ocad.pop, "pop")
 
 
-# Test: validate method uvi
 def test_0015():
+    """Test: validate method uvi."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_value_func(ocad.uvi, "uvi")
 
 
-# Test: validate method temp_min
 def test_0016():
+    """Test: validate method temp_min."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.temp_min, "temp", "min")
 
 
-# Test: validate method temp_max
 def test_0017():
+    """Test: validate method temp_max."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.temp_max, "temp", "max")
 
 
-# Test: validate method temp_day
 def test_0018():
+    """Test: validate method temp_day."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.temp_day, "temp", "day")
 
 
-# Test: validate method temp_night
 def test_0019():
+    """Test: validate method temp_night."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.temp_night, "temp", "night")
 
 
-# Test: validate method temp_eve
 def test_0020():
+    """Test: validate method temp_eve."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.temp_eve, "temp", "eve")
 
 
-# Test: validate method temp_morn
 def test_0021():
+    """Test: validate method temp_morn."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.temp_morn, "temp", "morn")
 
 
-# Test: validate method feels_like_day
 def test_0022():
+    """Test: validate method feels_like_day."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.feels_like_day, "feels_like", "day")
 
 
-# Test: validate method feels_like_night
 def test_0023():
+    """Test: validate method feels_like_night."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.feels_like_night, "feels_like", "night")
 
 
-# Test: validate method feels_like_eve
 def test_0024():
+    """Test: validate method feels_like_eve."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.feels_like_eve, "feels_like", "eve")
 
 
-# Test: validate method feels_like_morn
 def test_0025():
+    """Test: validate method feels_like_morn."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_temp_func(ocad.feels_like_morn, "feels_like", "morn")
 
 
-# Test: validate method weather_condition_id
 def test_0026():
+    """Test: validate method weather_condition_id."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_weather_func(ocad.weather_condition_id, "id")
 
 
-# Test: validate method weather_condition_main
 def test_0027():
+    """Test: validate method weather_condition_main."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_weather_func(ocad.weather_condition_main, "main")
 
 
-# Test: validate method weather_condition_description
 def test_0028():
+    """Test: validate method weather_condition_description."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_weather_func(ocad.weather_condition_description, "description")
 
 
-# Test: validate method weather_condition_icon
 def test_0029():
+    """Test: validate method weather_condition_icon."""
     ocad = OneCallApiDaily(LAT, LON, KEY)
     ocad._rawdata = RAW_DATA_DAILY
     validate_weather_func(ocad.weather_condition_icon, "icon")

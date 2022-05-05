@@ -16,7 +16,7 @@ def func_daily()
     ocad = OneCallApiDaily(LAT, LON, KEY)
 
     # 2. Update Open Weather data for One Call Api
-    ocad.updateData()
+    ocad.update_data()
 
     # 3. Work on processed data
     print("One Call Api configuration: \n", ocad.config() )

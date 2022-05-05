@@ -1,13 +1,8 @@
-#!/usr/bin/env python3
-
-"""
-This module provides a class to handle One Call Api response for Alerts from OpenWeatherMap
-"""
-
+"""This module provides a class to handle One Call Api response for Alerts from OpenWeatherMap."""
 import logging
-import requests
-
 from datetime import datetime
+
+import requests
 
 from pocar.OneCallApi import OneCallApi
 
@@ -26,7 +21,8 @@ logger = logging.getLogger(__name__)
 # Derived Class to handle alerts data API response
 class OneCallApiAlerts(OneCallApi):
     """
-    Base Class to handle OneCallApi response for Alerts from OpenWeatherMap
+    Base Class to handle OneCallApi response for Alerts from OpenWeatherMap.
+
     This Class is derived from :class:`~pocar.OneCallAPi.OneCallAPi`
 
     :param lat: Geographical coordinates of the location (latitude)
@@ -40,18 +36,18 @@ class OneCallApiAlerts(OneCallApi):
     """
 
     def __init__(self, lat, lon, key):
-        """
-        This is the constructor method
-        """
+        """This is the constructor method."""
         super().__init__(lat, lon, key, "current,hourly,minutely,daily")
 
     def __is_data_available(self, field):
+        """TBD."""
         value = False
         if ("alerts" in self._rawdata) and (field in self._rawdata["alerts"][0]):
             value = True
         return value
 
     def __extract_value_field(self, field):
+        """TBD."""
         value = "N/A"
         if self.__is_data_available(field) is True:
             value = self._rawdata["alerts"][0][field]
@@ -59,11 +55,12 @@ class OneCallApiAlerts(OneCallApi):
         return value
 
     def __extract_date_field(self, field, metrics=0):
+        """TBD."""
         value = "N/A"
         if self.__is_data_available(field) is True:
             if metrics == 0:
-                dt = datetime.fromtimestamp(self._rawdata["alerts"][0][field])
-                value = f"{dt:%Y-%m-%d %H:%M:%S}"
+                alert_dt = datetime.fromtimestamp(self._rawdata["alerts"][0][field])
+                value = f"{alert_dt:%Y-%m-%d %H:%M:%S}"
             else:
                 value = self._rawdata["alerts"][0][field]
         logger.debug("Value for %s is: %s", field, value)
@@ -71,19 +68,23 @@ class OneCallApiAlerts(OneCallApi):
 
     def raw_data_alerts(self):
         """
+        | The raw_data_alerts metod.
+
         | Returns field alerts of the variable :attr:`~pocar.OneCallAPi.OneCallAPi._raw_data`
         | This variable contains the One Call Api response for alerts raw data as a dictionary
 
         :return: raw data as a dictionary
         :rtype: dict
         """
-        value = dict()
+        value = {}
         if "alerts" in self._rawdata:
             value = self._rawdata["alerts"]
         return value
 
     def sender_name(self):
         """
+        | The sender_name metod.
+
         | Returns the value for sender_name from One Call Api response
         | One Call Api response field is: `alerts.sender_name`
 
@@ -94,6 +95,8 @@ class OneCallApiAlerts(OneCallApi):
 
     def event(self):
         """
+        | The event metod.
+
         | Returns the value for event from One Call Api response
         | One Call Api response field is: `alerts.event`
 
@@ -104,6 +107,8 @@ class OneCallApiAlerts(OneCallApi):
 
     def start_dt(self, metrics=0):
         """
+        | The start_dt metod.
+
         | Returns the value for start date from One Call Api response
         | This is the Date and time of the start of the alert
         | One Call Api response field is: `alerts.start`
@@ -118,6 +123,8 @@ class OneCallApiAlerts(OneCallApi):
 
     def end_dt(self, metrics=0):
         """
+        | The end_dt metod.
+
         | Returns the value for end date from One Call Api response
         | This is the Date and time of the end of the alert
         | One Call Api response field is: `alerts.end`
@@ -132,6 +139,8 @@ class OneCallApiAlerts(OneCallApi):
 
     def description(self):
         """
+        | The description metod.
+
         | Returns the value for description from One Call Api response
         | One Call Api response field is: `alerts.description`
 
@@ -142,6 +151,8 @@ class OneCallApiAlerts(OneCallApi):
 
     def tags(self):
         """
+        | The tags metod.
+
         | Returns the value for tags from One Call Api response
         | One Call Api response field is: `alerts.tags`
 

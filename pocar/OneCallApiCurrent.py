@@ -1,13 +1,8 @@
-#!/usr/bin/env python3
-
-"""
-This module provides a base class to handle One Call Api response for Current from OpenWeatherMap
-"""
-
+"""This module provides a base class to handle One Call Api response for Current from OpenWeatherMap."""
 import logging
-import requests
-
 from datetime import datetime
+
+import requests
 
 from pocar.OneCallApi import OneCallApi
 
@@ -26,7 +21,8 @@ logger = logging.getLogger(__name__)
 # Derived Class to handle Current weather data API response
 class OneCallApiCurrent(OneCallApi):
     """
-    Base Class to handle OneCallApi response for Alerts from OpenWeatherMap
+    Base Class to handle OneCallApi response for Alerts from OpenWeatherMap.
+
     This Class is derived from :class:`~pocar.OneCallAPi.OneCallAPi`
 
     :param lat: Geographical coordinates of the location (latitude)
@@ -40,18 +36,18 @@ class OneCallApiCurrent(OneCallApi):
     """
 
     def __init__(self, lat, lon, key):
-        """
-        This is the constructor method
-        """
+        """This is the constructor method."""
         super().__init__(lat, lon, key, "minutely,daily,hourly,alerts")
 
     def __is_data_available(self, field):
+        """TBD."""
         value = False
         if ("current" in self._rawdata) and (field in self._rawdata["current"]):
             value = True
         return value
 
     def __extract_date_field(self, field, metrics=0):
+        """TBD."""
         value = "N/A"
         if self.__is_data_available(field) is True:
             if metrics == 0:
@@ -63,6 +59,7 @@ class OneCallApiCurrent(OneCallApi):
         return value
 
     def __extract_value_field(self, field):
+        """TBD."""
         value = "N/A"
         if self.__is_data_available(field) is True:
             value = self._rawdata["current"][field]
@@ -70,6 +67,7 @@ class OneCallApiCurrent(OneCallApi):
         return value
 
     def __extract_weather_field(self, field):
+        """TBD."""
         value = "N/A"
         if self.__is_data_available("weather") is True:
             if field in self._rawdata["current"]["weather"][0]:
@@ -79,19 +77,23 @@ class OneCallApiCurrent(OneCallApi):
 
     def raw_data_current(self):
         """
+        | The raw_data_current method.
+
         | Returns field current of the variable :attr:`~pocar.OneCallAPi.OneCallAPi._raw_data`
         | This variable contains the One Call Api response for alerts raw data as a dictionary
 
         :return: raw data as a dictionary
         :rtype: dict
         """
-        value = dict()
+        value = {}
         if "current" in self._rawdata:
             value = self._rawdata["current"]
         return value
 
     def data_time(self, metrics=0):
         """
+        | The data_time method.
+
         | Returns the value for dt from One Call Api response
         | This is the Time when current data was acquired
         | One Call Api response field is: `current.dt`
@@ -106,6 +108,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def sunrise(self, metrics=0):
         """
+        | The sunrise method.
+
         | Returns the value for sunrise from One Call Api response
         | This is the sunrise time for current
         | One Call Api response field is: `current.sunrise`
@@ -120,6 +124,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def sunset(self, metrics=0):
         """
+        | The sunset method.
+
         | Returns the value for sunset from One Call Api response
         | This is the sunset time for current
         | One Call Api response field is: `current.sunset`
@@ -134,6 +140,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def temperature(self):
         """
+        | The temperature method.
+
         | Returns the value for temp from One Call Api response
         | One Call Api response field is: `current.temp`
 
@@ -144,6 +152,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def temperature_feels_like(self):
         """
+        | The temperature_feels_like method.
+
         | Returns the value for feels_like from One Call Api response
         | One Call Api response field is: `current.feels_like`
 
@@ -154,6 +164,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def pressure(self):
         """
+        | The pressure method.
+
         | Returns the value for pressure from One Call Api response
         | One Call Api response field is: `current.pressure`
 
@@ -164,6 +176,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def humidity(self):
         """
+        | The humidity method.
+
         | Returns the value for humidity from One Call Api response
         | One Call Api response field is: `current.humidity`
 
@@ -174,6 +188,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def dew_point(self):
         """
+        | The dew_point method.
+
         | Returns the value for dew_point from One Call Api response
         | One Call Api response field is: `current.dew_point`
         | Atmospheric temperature (varying according to pressure and humidity)
@@ -186,6 +202,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def clouds(self):
         """
+        | The clouds method.
+
         | Returns the value for clouds from One Call Api response
         | One Call Api response field is: `current.clouds`
 
@@ -196,6 +214,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def uvi(self):
         """
+        | The uvi method.
+
         | Returns the value for uvi from One Call Api response
         | One Call Api response field is: `current.uvi`
 
@@ -206,6 +226,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def visibility(self):
         """
+        | The visibility method.
+
         | Returns the value for visibility from One Call Api response
         | One Call Api response field is: `current.visibility`
 
@@ -216,6 +238,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def wind_speed(self):
         """
+        | The wind_speed method.
+
         | Returns the value for wind_speed from One Call Api response
         | One Call Api response field is: `current.wind_speed`
 
@@ -226,6 +250,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def wind_gust(self):
         """
+        | The wind_gust method.
+
         | Returns the value for wind_gust from One Call Api response
         | One Call Api response field is: `current.wind_gust`
         | This value is not available for all locations.
@@ -237,6 +263,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def wind_deg(self):
         """
+        | The wind_deg method.
+
         | Returns the value for wind_deg from One Call Api response
         | One Call Api response field is: `current.wind_deg`
 
@@ -247,6 +275,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def rain_volume(self):
         """
+        | The rain_volume method.
+
         | Returns the value for rain.1h from One Call Api response
         | One Call Api response field is: `current.rain.1h`
         | This value is not available for all locations.
@@ -262,6 +292,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def snow_volume(self):
         """
+        | The snow_volume method.
+
         | Returns the value for snow.1h from One Call Api response
         | One Call Api response field is: `current.snow.1h`
         | This value is not available for all locations.
@@ -277,6 +309,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def weather_condition_id(self):
         """
+        | The weather_condition_id method.
+
         | Returns the value for weather.id from One Call Api response
         | One Call Api response field is: `current.weather.id`
 
@@ -287,6 +321,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def weather_condition_main(self):
         """
+        | The weather_condition_main method.
+
         | Returns the value for weather.main from One Call Api response
         | One Call Api response field is: `current.weather.main`
 
@@ -297,6 +333,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def weather_condition_description(self):
         """
+        | The weather_condition_description method.
+
         | Returns the value for weather.description from One Call Api response
         | One Call Api response field is: `current.weather.description`
 
@@ -307,6 +345,8 @@ class OneCallApiCurrent(OneCallApi):
 
     def weather_condition_icon(self):
         """
+        | The weather_condition_icon method.
+
         | Returns the value for weather.icon from One Call Api response
         | One Call Api response field is: `current.weather.icon`
         | The icon can be retrieve from: http://openweathermap.org/img/wn/<icon_id>@2x.png

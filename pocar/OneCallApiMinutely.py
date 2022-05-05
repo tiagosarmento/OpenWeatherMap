@@ -1,13 +1,8 @@
-#!/usr/bin/env python3
-
-"""
-This module provides a base class to handle One Call Api response from OpenWeatherMap
-"""
-
+"""This module provides a base class to handle One Call Api response from OpenWeatherMap."""
 import logging
-import requests
-
 from datetime import datetime
+
+import requests
 
 from pocar.OneCallApi import OneCallApi
 
@@ -27,19 +22,21 @@ logger = logging.getLogger(__name__)
 # Minutely holds the precipitation forecast for the next hour in a minutely basis
 # Gets 61 values: current + next 60 minutes
 class OneCallApiMinutely(OneCallApi):
+    """TBD."""
+
     def __init__(self, lat, lon, key):
-        """
-        This is the constructor method
-        """
+        """This is the constructor method."""
         super().__init__(lat, lon, key, "current,daily,hourly,alerts")
 
     def __is_data_available(self, minute, field):
+        """TBD."""
         value = False
         if ("minutely" in self._rawdata) and (field in self._rawdata["minutely"][minute]):
             value = True
         return value
 
     def __extract_date_field(self, minute, field, metrics=0):
+        """TBD."""
         value = "N/A"
         if self.__is_data_available(minute, field) is True:
             if metrics == 0:
@@ -51,6 +48,7 @@ class OneCallApiMinutely(OneCallApi):
         return value
 
     def __extract_value_field(self, minute, field):
+        """TBD."""
         value = "N/A"
         if self.__is_data_available(minute, field) is True:
             value = self._rawdata["minutely"][minute][field]
@@ -58,15 +56,17 @@ class OneCallApiMinutely(OneCallApi):
         return value
 
     def raw_data_minutely(self):
-        value = dict()
+        """TBD."""
+        value = {}
         if "minutely" in self._rawdata:
             value = self._rawdata["minutely"]
         return value
 
     def precipitation(self, minute=0, all_values=False):
+        """TBD."""
         if minute < 0 or minute > 60:
             raise ValueError("The 'minute' argument must be within range [0, 60]")
-        elif all_values is True:
+        if all_values is True:
             value = [0] * 61  # Initialize the 61 precipitation values
             for idx in range(61):
                 value[idx] = self.__extract_value_field(idx, "precipitation")
@@ -75,9 +75,10 @@ class OneCallApiMinutely(OneCallApi):
         return value
 
     def data_time(self, minute=0, metrics=0, all_values=False):
+        """TBD."""
         if minute < 0 or minute > 60:
             raise ValueError("The 'minute' argument must be within range [0, 60]")
-        elif all_values is True:
+        if all_values is True:
             value = [0] * 61  # Initialize the 61 data time values
             for idx in range(61):
                 value[idx] = self.__extract_date_field(idx, "dt", metrics)

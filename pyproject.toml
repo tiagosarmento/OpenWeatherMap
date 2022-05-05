@@ -34,7 +34,13 @@ pytest = "^7.1.2"
 pytest-cov = "^3.0.0"
 black = "^22.3.0"
 flake8 = "^4.0.1"
+flake8-bugbear = "^22.4.25"
+flake8-docstrings = "^1.6.0"
+flake8-print = "^5.0.0"
+pep8-naming = "^0.12.1"
+pep257 = "^0.7.0"
 pylint = "^2.13.8"
+reorder-python-imports = "^3.1.0"
 pre-commit = "^2.18.1"
 
 [build-system]

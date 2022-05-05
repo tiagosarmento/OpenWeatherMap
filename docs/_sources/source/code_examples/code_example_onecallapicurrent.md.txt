@@ -15,7 +15,7 @@ def func_current()
     ocac = OneCallApiCurrent(LAT, LON, KEY)
 
     # 2. Update Open Weather data for One Call Api
-    ocac.updateData()
+    ocac.update_data()
 
     # 3. Work on processed data
     print("One Call Api configuration: \n", ocac.config() )
